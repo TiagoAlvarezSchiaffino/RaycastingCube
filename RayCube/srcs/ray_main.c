@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:18 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 08:32:43 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 05:46:30 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
-	ft_printf("Hello World!\n");
+	t_gm	gm;
+
+	c3d_check_file(ac, av);
+	c3d_success_exit();
 	return (0);
+	(void)gm;
 }
