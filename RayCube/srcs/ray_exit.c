@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   ray_main.c                                   		                      */
+/*   ray_exit.c                                   		                      */
 /*                                                                            */
 /*   By: Tiago <tiagoalvarezschiaffino@gmail.com>                             */
 /*                                                             / \__          */
 /*                                                            (    @\___      */
 /*                                                             /         O    */
-/*   Created: 2024/06/14 08:32:18 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:04:10 by Tiago                  /_____/ U         */
+/*   Created: 2024/06/15 06:06:53 by Tiago                    /   (_____/     */
+/*   Updated: 2024/06/15 06:07:38 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-int	main(int ac, char **av)
+int	ray_fail_exit(char *str)
 {
-	t_gm	gm;
+	ft_dprintf(2, "Error\n%s\n", str);
+	system("leaks -q cub3D");
+	exit(1);
+	return (1);
+}
 
-	ray_init_gm(&gm);
-	ray_check_file(&gm, ac, av);
-	ray_hooks(&gm);
-	mlx_loop(gm.mlx);
-	ray_success_exit();
+int	ray_success_exit(void)
+{
+	ft_printf("Thanks for playing!\n");
+	system("leaks -q cub3D");
+	exit(0);
 	return (0);
-	(void)gm;
 }

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   ray_main.c                                   		                      */
+/*   ft_freesplit.c                                   		                  */
 /*                                                                            */
 /*   By: Tiago <tiagoalvarezschiaffino@gmail.com>                             */
 /*                                                             / \__          */
 /*                                                            (    @\___      */
 /*                                                             /         O    */
-/*   Created: 2024/06/14 08:32:18 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:04:10 by Tiago                  /_____/ U         */
+/*   Created: 2024/06/15 05:47:54 by Tiago                    /   (_____/     */
+/*   Updated: 2024/06/15 05:48:51 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_freesplit(char **split)
 {
-	t_gm	gm;
+	int	i;
 
-	ray_init_gm(&gm);
-	ray_check_file(&gm, ac, av);
-	ray_hooks(&gm);
-	mlx_loop(gm.mlx);
-	ray_success_exit();
-	return (0);
-	(void)gm;
+	i = -1;
+	while (split[++i] != NULL)
+		free(split[i]);
+	free(split);
 }

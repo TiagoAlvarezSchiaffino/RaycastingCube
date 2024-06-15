@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/15 05:39:11 by Tiago                 /_____/ U          #
+#   Updated: 2024/06/15 05:47:42 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
@@ -20,8 +20,11 @@ CFLAGS		=	-Wall -Wextra -Werror -Imlx
 # CFLAGS		+=	-fsanitize=address -g3
 MLXFLAGS	=	-L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 SRCS_FILES	=	c3d_main \
+				c3d_hook \
 				c3d_exit \
-				c3d_checkfile
+				c3d_init \
+				c3d_checkfile \
+				c3d_checkelement
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/

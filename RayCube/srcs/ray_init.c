@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   ray_main.c                                   		                      */
+/*   ray_init.c                                   		                      */
 /*                                                                            */
 /*   By: Tiago <tiagoalvarezschiaffino@gmail.com>                             */
 /*                                                             / \__          */
 /*                                                            (    @\___      */
 /*                                                             /         O    */
-/*   Created: 2024/06/14 08:32:18 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:04:10 by Tiago                  /_____/ U         */
+/*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
+/*   Updated: 2024/06/15 06:10:07 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-int	main(int ac, char **av)
+void	ray_init_gm(t_gm *gm)
 {
-	t_gm	gm;
-
-	ray_init_gm(&gm);
-	ray_check_file(&gm, ac, av);
-	ray_hooks(&gm);
-	mlx_loop(gm.mlx);
-	ray_success_exit();
-	return (0);
-	(void)gm;
+	gm->mlx = mlx_init();
+	gm->win.ref = mlx_new_window(gm->mlx, WIN_H, WIN_W, "cub3D");
+	gm->map.n_img.ref = NULL;
+	gm->map.e_img.ref = NULL;
+	gm->map.s_img.ref = NULL;
+	gm->map.w_img.ref = NULL;
+	gm->map.c_rgb.hex = -1;
+	gm->map.f_rgb.hex = -1;
 }

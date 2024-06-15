@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 05:45:03 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 05:52:33 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define EXIT_EVENT	17
 # define EXIT_MASK	0
 
+/* Player prefs */
+# define WIN_H		1280
+# define WIN_W		800
+
 /* Vector struct */
 typedef struct s_vct
 {
@@ -39,10 +43,10 @@ typedef struct s_vct
 /* RGB struct */
 typedef struct s_rgb
 {
-	int				r;
-	int				g;
-	int				b;
-	unsigned long	hex;
+	int	r;
+	int	g;
+	int	b;
+	int	hex;
 }	t_rgb;
 
 /* Image struct */
@@ -78,9 +82,15 @@ typedef struct s_gm
 	t_map	map;
 }	t_gm;
 
-void	c3d_check_file(int ac, char **av);
+void	ray_init_gm(t_gm *gm);
 
-void	c3d_fail_exit(char *str);
-void	c3d_success_exit(void);
+void	ray_check_file(t_gm *gm, int ac, char **av);
+
+void	check_element(t_gm *gm, char **av);
+
+int		ray_fail_exit(char *str);
+int		ray_success_exit(void);
+
+void 	ray_hooks(t_gm *gm);
 
 #endif
