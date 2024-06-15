@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:43:45 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:24:08 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ typedef struct s_map
 	t_img	e_img;
 	t_img	s_img;
 	t_img	w_img;
+	char	**map;
+	int		x;
+	int		y;
 }	t_map;
 
 /* Gamemaster struct*/
