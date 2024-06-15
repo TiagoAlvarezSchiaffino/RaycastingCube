@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 05:54:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:37:44 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:53:20 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void	ray_check_element(t_gm *gm, char **av)
 	}
 	close(fd);
 	if (gm->map.map != NULL)
-		print_da(gm->map.map);
+		ray_check_map(gm);
 }

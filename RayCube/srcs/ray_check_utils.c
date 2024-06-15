@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:31:04 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:40:58 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:58:22 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ray_all_elements_present(t_gm *gm)
 	if (!gm->map.n_img.ref || !gm->map.e_img.ref
 		|| !gm->map.s_img.ref || !gm->map.w_img.ref
 		|| gm->map.c_rgb.hex < 0 || gm->map.f_rgb.hex < 0)
-		ray_fail_exit("Missing element");
+			ray_fail_exit("Missing element");
 }
 
 int	ray_map_contents_only(char *str)
@@ -35,7 +35,7 @@ int	ray_map_contents_only(char *str)
 				&& str[i] != 'S' && str[i] != 'W' && str[i] != ' '
 				&& str[i] != '\t' && (str[i] != '\n' || i == 0))
 			|| str[ft_strlen(str) - 1] != '\n')
-			return (0);
+			return (-1);
 	}
 	return (1);
 }
@@ -71,3 +71,25 @@ void	ray_trim_back_spaces(char *str, int len)
 		str[len] = '\0';
 	ray_trim_back_spaces(str, len - 1);
 }
+
+// int	ray_contains_only(char *str, char *to_find)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	res;
+
+// 	i = -1;
+// 	while (str[++i] != '\0')
+// 	{
+// 		j = -1;
+// 		res = 0;
+// 		while (to_find[++j] != '\0')
+// 		{
+// 			if (str[i] == to_find[j])
+// 				res = 1;
+// 		}
+// 		if (res == 0)
+// 			return (0);
+// 	}
+// 	return (1);
+// }
