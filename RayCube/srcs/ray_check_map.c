@@ -8,20 +8,11 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:49:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:28:13 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:51:08 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
-
-void	trim_back_spaces(char *str, int len)
-{
-	if (len == 0 || str[len] != ' ')
-		return ;
-	if (str[len] == ' ')
-		str[len] = '\0';
-	trim_back_spaces(str, len - 1);
-}
 
 static void	add_map(t_list **map_list, char *str)
 {
@@ -39,7 +30,7 @@ static void	add_map(t_list **map_list, char *str)
 		else if (str[i] != '\n')
 			temp = ft_append_char(temp, str[i]);
 	}
-	trim_back_spaces(temp, ft_strlen(temp) - 1);
+	ray_trim_back_spaces(temp, ft_strlen(temp) - 1);
 	ft_memcpy(node->content, &temp, sizeof(char *));
 	ft_lstadd_back(map_list, node);
 }
@@ -60,19 +51,29 @@ static int	get_map_width(t_list **map_list)
 	return (max);
 }
 
-static void	map_is_valid(t_gm *gm, t_list **map_list)
+static void	store_map(t_gm *gm, t_list **map_list)
 {
 	static int	checked = 0;
+	t_list		*node;
+	int			i;
 
 	if (checked)
 		return ;
 	checked = 1;
 	gm->map.y = ft_lstsize(*map_list);
 	gm->map.x = get_map_width(map_list);
-	print_ll(map_list);
+	gm->map.map = ft_calloc(gm->map.y + 1, sizeof(char *));
+	i = -1;
+	node = *map_list;
+	while (++i < gm->map.y)
+	{
+		gm->map.map[i] = *(char **)node->content;
+		node = node->next;
+	}
+	gm->map.map[i] = 0;
 }
 
-void	ray_check_map(t_gm *gm, char *str, int fd)
+void	ray_get_map(t_gm *gm, char *str, int fd)
 {
 	static int		mapmode = 0;
 	static t_list	*map_list = NULL;
@@ -88,6 +89,6 @@ void	ray_check_map(t_gm *gm, char *str, int fd)
 	mapmode = 1;
 	add_map(&map_list, str);
 	free(str);
-	ray_check_map(gm, get_next_line(fd), fd);
-	map_is_valid(gm, &map_list);
+	ray_get_map(gm, get_next_line(fd), fd);
+	store_map(gm, &map_list);
 }

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 05:54:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:49:14 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:37:44 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ void	ray_check_element(t_gm *gm, char **av)
 	{
 		split = ft_split_charset(str, " \t\n");
 		get_element(gm, split);
-		ray_check_map(gm, str, fd);
+		ray_get_map(gm, str, fd);
 		ft_freesplit(split);
 		str = get_next_line(fd);
 	}
 	close(fd);
+	if (gm->map.map != NULL)
+		print_da(gm->map.map);
 }

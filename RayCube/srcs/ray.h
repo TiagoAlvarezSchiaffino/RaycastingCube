@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:24:08 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:35:16 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ typedef struct s_gm
 void	ray_init_gm(t_gm *gm);
 
 void	ray_check_file(t_gm *gm, int ac, char **av);
-
-void	ray_check_map(t_gm *gm, char *str, int fd);
+void	ray_get_map(t_gm *gm, char *str, int fd);
 void	ray_check_element(t_gm *gm, char **av);
 
 void	ray_all_elements_present(t_gm *gm);
 int		ray_map_contents_only(char *str);
 int		ray_is_all_num(char *str1, char *str2, char *str3);
+void	ray_trim_back_spaces(char *str, int len);
 
 int		ray_fail_exit(char *str);
 int		ray_success_exit(void);
@@ -103,5 +103,6 @@ void	ray_hooks(t_gm *gm);
 
 // Temp (TO DELETE)
 void	print_ll(t_list **list);
+void	print_da(char **array);
 
 #endif

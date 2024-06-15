@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:10:07 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:41:55 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ray_init_gm(t_gm *gm)
 	gm->map.e_img.ref = NULL;
 	gm->map.s_img.ref = NULL;
 	gm->map.w_img.ref = NULL;
+	gm->map.map = NULL;
 	gm->map.c_rgb.hex = -1;
 	gm->map.f_rgb.hex = -1;
 }

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:31:04 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:03:27 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:40:58 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,13 @@ int	ray_is_all_num(char *str1, char *str2, char *str3)
 		str3++;
 	}
 	return (1);
+}
+
+void	ray_trim_back_spaces(char *str, int len)
+{
+	if (len == 0 || str[len] != ' ')
+		return ;
+	if (str[len] == ' ')
+		str[len] = '\0';
+	ray_trim_back_spaces(str, len - 1);
 }
