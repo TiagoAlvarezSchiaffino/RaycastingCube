@@ -7,5 +7,5 @@ NO ./sprites/north.xpm
 SO          ./sprites/south.xpm
 WE       ./sprites/west.xpm
 
-F 255,255,255
+F 1,1,a
 C 225,30,0

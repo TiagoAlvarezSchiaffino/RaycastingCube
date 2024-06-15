@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 05:52:33 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:09:20 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_vct
 /* RGB struct */
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
-	int	hex;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	int				hex;
 }	t_rgb;
 
 /* Image struct */
@@ -91,6 +91,6 @@ void	check_element(t_gm *gm, char **av);
 int		ray_fail_exit(char *str);
 int		ray_success_exit(void);
 
-void 	ray_hooks(t_gm *gm);
+void	ray_hooks(t_gm *gm);
 
 #endif
