@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 09:01:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 09:01:43 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:15:16 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*list;
 
-	if (!lst)
+	if (!lst || !*lst || !new)
 		return ;
 	if (*lst != NULL)
 	{

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 09:13:47 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 09:14:13 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:17:01 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 	int	i;
 
 	i = -1;
+	if (!dst || !src)
+		return (dst);
 	if (dst == src)
 		return (dst);
 	if (dst > src)
@@ -28,10 +30,7 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 			*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);
 		return (dst);
 	}
-	else
-	{
-		while (++i < (int)n)
-			*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);
-	}
+	while (++i < (int)n)
+		*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);
 	return (dst);
 }

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 10:05:23 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 10:06:00 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:23:18 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strndup(const char *str, size_t n)
 	size_t	i;
 	char	*output;
 
+	if (str == NULL)
+		return (NULL);
 	output = malloc(sizeof(char) * n + 1);
 	if (output == NULL)
 		return (NULL);

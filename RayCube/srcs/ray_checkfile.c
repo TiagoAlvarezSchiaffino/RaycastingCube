@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:03:19 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:06:44 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:33:25 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ static void	check_file_format(int ac, char **av)
 void	ray_check_file(t_gm *gm, int ac, char **av)
 {
 	check_file_format(ac, av);
-	check_element(gm, av);
+	ray_check_element(gm, av);
 }

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 09:57:21 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 09:58:30 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:20:51 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	size_t	dest_length;
 	size_t	index;
 
+	if (!dest || !src)
+		return (0);
 	if (size <= ft_strlen(dest))
 		return (size + ft_strlen(src));
 	dest_length = ft_strlen(dest);

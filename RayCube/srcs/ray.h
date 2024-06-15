@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:09:20 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:29:02 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ void	ray_init_gm(t_gm *gm);
 
 void	ray_check_file(t_gm *gm, int ac, char **av);
 
-void	check_element(t_gm *gm, char **av);
+void	ray_check_element(t_gm *gm, char **av);
+
+void	ray_all_elements_present(t_gm *gm, int fd);
+int		ray_map_contents_only(char *str);
 
 int		ray_fail_exit(char *str);
 int		ray_success_exit(void);

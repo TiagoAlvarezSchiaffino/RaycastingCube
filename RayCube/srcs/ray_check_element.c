@@ -1,14 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   ray_checkelement.c                                   		              */
+/*   ray_check_element.c                                   		              */
 /*                                                                            */
 /*   By: Tiago <tiagoalvarezschiaffino@gmail.com>                             */
 /*                                                             / \__          */
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 05:54:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:13:35 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:30:49 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,14 @@ static void	get_element(t_gm *gm, char **split)
 		set_color(&gm->map.c_rgb, split);
 }
 
-void	check_element(t_gm *gm, char **av)
+static void	get_map(t_gm *gm, char *str, int fd)
+{
+	if (ray_map_contents_only(str) == 0)
+		return ;
+	ray_all_elements_present(gm, fd);
+}
+
+void	ray_check_element(t_gm *gm, char **av)
 {
 	int		fd;
 	char	*str;
@@ -99,15 +106,11 @@ void	check_element(t_gm *gm, char **av)
 	str = get_next_line(fd);
 	while (str)
 	{
-		split = ft_split(str, ' ');
+		split = ft_split_charset(str, " \t");
 		get_element(gm, split);
+		get_map(gm, str, fd);
 		free(str);
 		ft_freesplit(split);
 		str = get_next_line(fd);
 	}
-	if (!gm->map.n_img.ref || !gm->map.e_img.ref
-		|| !gm->map.s_img.ref || !gm->map.w_img.ref
-		|| gm->map.c_rgb.hex < 0 || gm->map.f_rgb.hex < 0)
-		ray_fail_exit("Missing element");
-	close(fd);
 }

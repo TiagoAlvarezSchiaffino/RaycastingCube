@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 10:06:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 10:07:53 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:23:37 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	size_t	j;
 
 	i = -1;
+	if (!str || !to_find)
+		return (NULL);
 	if (to_find[0] == 0)
 		return ((char *)str);
 	while (str[++i] != '\0' && i < len)

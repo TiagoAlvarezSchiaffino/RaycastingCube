@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 09:55:47 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 09:57:10 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:20:16 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strdup(const char *src)
 	int		counter;
 	int		index;
 
+	if (!src)
+		return (NULL);
 	counter = 0;
 	while (src[counter] != '\0')
 		counter++;

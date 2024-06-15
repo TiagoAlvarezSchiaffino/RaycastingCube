@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 09:03:00 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 09:03:44 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:16:04 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	t_list	*temp;
 
-	if (!lst)
+	if (!lst || !del)
 		return ;
 	(*del)(lst->content);
 	temp = lst->next;

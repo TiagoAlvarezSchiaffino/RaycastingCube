@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 10:37:11 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 10:38:45 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:21:14 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 
+	if (!dst || !src)
+		return (0);
 	i = -1;
 	if (size > 0)
 	{

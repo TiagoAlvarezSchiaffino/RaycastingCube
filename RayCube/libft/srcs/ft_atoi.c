@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:33:07 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 08:34:15 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:14:58 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ int	is_space(int c)
 {
 	return (c == '\t' || c == '\n' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ');
-}
-
-int	check_max(int value)
-{
-	if (value == -1)
-		return (0);
-	return (-1);
 }
 
 long	ft_atoi(const char *str)
@@ -38,6 +31,8 @@ long	ft_atoi(const char *str)
 	value = 1;
 	number = 0;
 	counter = 0;
+	if (str == NULL)
+		return (0);
 	while (is_space(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')

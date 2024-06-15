@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 09:04:49 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/14 09:06:27 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:16:32 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*newlist;
 	t_list	*head;
 
-	if (!lst)
+	if (!lst || !f || !del)
 		return (NULL);
 	newlist = ft_lstnew((*f)(lst->content));
 	if (newlist == NULL)
