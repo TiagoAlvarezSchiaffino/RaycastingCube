@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 07:58:40 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 08:05:53 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 08:20:09 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	add_map(t_list **map_list, char *str)
 		else if (str[i] != '\n')
 			temp = ft_append_char(temp, str[i]);
 	}
-	ray_trim_back_spaces(temp, ft_strlen(temp) - 1);
+	ray_trim_spaces(temp, ft_strlen(temp) - 1);
 	ft_memcpy(node->content, &temp, sizeof(char *));
 	ft_lstadd_back(map_list, node);
 }
@@ -67,7 +67,7 @@ static void	store_map(t_gm *gm, t_list **map_list)
 	node = *map_list;
 	while (++i < gm->map.y)
 	{
-		gm->map.map[i] = *(char **)node->content;
+		gm->map.map[i] = ray_pad_spaces(gm, *(char **)node->content);
 		node = node->next;
 	}
 	gm->map.map[i] = 0;
@@ -77,16 +77,12 @@ void	ray_get_map(t_gm *gm, char *str, int fd)
 {
 	static int		mapmode = 0;
 	static t_list	*map_list = NULL;
-	int				errno;
 
-	errno = ray_map_contents_only(str);
-	if (errno <= 0)
+	if (ray_map_contents_only(str) == 0)
 	{
 		free(str);
-		if (mapmode && errno == -1)
-			ray_fail_exit("Invalid character in map");
 		if (mapmode && str != NULL)
-			ray_fail_exit("Extra new line at end of file");
+			ray_fail_exit("Invalid character in map");
 		return ;
 	}
 	ray_all_elements_present(gm);
