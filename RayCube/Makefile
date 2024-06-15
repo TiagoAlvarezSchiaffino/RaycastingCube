@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/15 06:13:52 by Tiago                 /_____/ U          #
+#   Updated: 2024/06/15 06:33:42 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
@@ -24,8 +24,10 @@ SRCS_FILES	=	c3d_main \
 				c3d_exit \
 				c3d_init \
 				c3d_checkfile \
+				c3d_check_map \
 				c3d_check_utils \
-				c3d_check_element
+				c3d_check_element \
+				temp
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/

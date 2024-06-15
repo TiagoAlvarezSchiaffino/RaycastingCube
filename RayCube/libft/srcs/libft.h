@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 10:32:59 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:26:16 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 06:38:31 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int		ft_dprintf(int fd, const char *str, ...);
 char	*get_next_line(int fd);
 t_list	*ft_array_to_list(void *array, int array_size, int elem_size);
 void	*ft_list_to_array(t_list *lst, int elem_size);
+char	*ft_append_char(char *input, char c);
 
 #endif

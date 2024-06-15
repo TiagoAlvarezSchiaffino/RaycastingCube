@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:23:40 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/15 06:14:23 by Tiago                 /_____/ U          #
+#   Updated: 2024/06/15 06:34:16 by Tiago                  /_____/ U         #
 #                                                                            #
 # ************************************************************************** #
 
@@ -88,7 +88,8 @@ SRC_FILES		=	ft_isalpha \
 					ft_dprintf_get_flags \
 					ft_dprintf_print \
 					ft_dprintf_utils \
-					ft_dprintf
+					ft_dprintf \
+					ft_append_char
 SRCS 			= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS 			= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
 

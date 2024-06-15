@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   ray_main.c                                   		                      */
+/*   ft_append_char.c                          		                          */
 /*                                                                            */
 /*   By: Tiago <tiagoalvarezschiaffino@gmail.com>                             */
 /*                                                             / \__          */
 /*                                                            (    @\___      */
 /*                                                             /         O    */
-/*   Created: 2024/06/14 08:32:18 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:58:35 by Tiago                  /_____/ U         */
+/*   Created: 2024/06/15 06:34:30 by Tiago                    /   (_____/     */
+/*   Updated: 2024/06/15 06:37:04 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_append_char(char *input, char c)
 {
-	t_gm	gm;
+	char	*output;
+	int		size;
+	int		i;
 
-	ray_init_gm(&gm);
-	ray_check_file(&gm, ac, av);
-	ray_hooks(&gm);
-	// mlx_loop(gm.mlx);
-	ray_success_exit();
-	return (0);
-	(void)gm;
+	size = 0;
+	i = -1;
+	if (input != NULL)
+		size = ft_strlen(input);
+	output = ft_calloc(size + 2, sizeof(char));
+	if (input != NULL)
+	{
+		while (input[++i] != '\0')
+			output[i] = input[i];
+	}
+	output[i] = c;
+	output[i + 1] = '\0';
+	free(input);
+	return (output);
 }

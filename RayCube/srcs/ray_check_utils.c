@@ -8,15 +8,14 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:31:04 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 06:33:13 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/15 07:03:27 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-void	ray_all_elements_present(t_gm *gm, int fd)
+void	ray_all_elements_present(t_gm *gm)
 {
-	close(fd);
 	if (!gm->map.n_img.ref || !gm->map.e_img.ref
 		|| !gm->map.s_img.ref || !gm->map.w_img.ref
 		|| gm->map.c_rgb.hex < 0 || gm->map.f_rgb.hex < 0)
@@ -28,12 +27,38 @@ int	ray_map_contents_only(char *str)
 	int	i;
 
 	i = -1;
+	if (str == NULL)
+		return (0);
 	while (str[++i] != '\0')
 	{
-		if (str[i] != '1' && str[i] != '0' && str[i] != 'N' && str[i] != 'E'
-			&& str[i] != 'S' && str[i] != 'W' && str[i] != ' ' && str[i] != '\t'
-			&& (str[i] != '\n' || i == 0))
+		if ((str[i] != '1' && str[i] != '0' && str[i] != 'N' && str[i] != 'E'
+				&& str[i] != 'S' && str[i] != 'W' && str[i] != ' '
+				&& str[i] != '\t' && (str[i] != '\n' || i == 0))
+			|| str[ft_strlen(str) - 1] != '\n')
 			return (0);
+	}
+	return (1);
+}
+
+int	ray_is_all_num(char *str1, char *str2, char *str3)
+{
+	while (*str1 != '\0')
+	{
+		if (*str1 < '0' || *str1 > '9')
+			return (0);
+		str1++;
+	}
+	while (*str2 != '\0')
+	{
+		if (*str2 < '0' || *str2 > '9')
+			return (0);
+		str2++;
+	}
+	while (*str3 != '\0')
+	{
+		if (*str3 < '0' || *str3 > '9')
+			return (0);
+		str3++;
 	}
 	return (1);
 }
