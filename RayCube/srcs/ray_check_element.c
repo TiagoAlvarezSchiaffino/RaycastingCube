@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 05:54:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:53:20 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/17 22:21:15 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ void	ray_check_element(t_gm *gm, char **av)
 	}
 	close(fd);
 	if (gm->map.map != NULL)
-		ray_check_map(gm);
+		ray_check_map(gm, 0, 0);
+	if (gm->ply.e_dir == NOTSET)
+		ray_fail_exit("No player set in map");
 }

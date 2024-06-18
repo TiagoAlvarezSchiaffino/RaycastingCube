@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 07:58:40 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 08:20:09 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/17 22:32:24 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static void	store_map(t_gm *gm, t_list **map_list)
 	if (checked)
 		return ;
 	checked = 1;
-	gm->map.y = ft_lstsize(*map_list);
-	gm->map.x = get_map_width(map_list);
-	gm->map.map = ft_calloc(gm->map.y + 1, sizeof(char *));
+	gm->map.size.y = ft_lstsize(*map_list);
+	gm->map.size.x = get_map_width(map_list);
+	gm->map.map = ft_calloc(gm->map.size.y + 1, sizeof(char *));
 	i = -1;
 	node = *map_list;
-	while (++i < gm->map.y)
+	while (++i < gm->map.size.y)
 	{
 		gm->map.map[i] = ray_pad_spaces(gm, *(char **)node->content);
 		node = node->next;

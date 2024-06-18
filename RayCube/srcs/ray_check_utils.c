@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:31:04 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 08:18:07 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/17 22:30:01 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ray_trim_spaces(char *str, int len)
 
 char	*ray_pad_spaces(t_gm *gm, char *str)
 {
-	if (ft_strlen(str) < (size_t)gm->map.x)
+	if (ft_strlen(str) < (size_t)gm->map.size.x)
 	{
 		str = ft_append_char(str, ' ');
 		return (ray_pad_spaces(gm, str));
