@@ -2,24 +2,11 @@ NO ./sprites/north.xpm
 EA ./sprites/east.xpm
 SO ./sprites/south.xpm
 WE ./sprites/west.xpm
+D  ./sprites/door.xpm
 
 F 1,1,1     
-
 C 225,30,0
 
-
-
-
-
-
-
-
-
-
-
-
- 1
-1N1 1
- 11101
-	1
-1
+111
+1N1
+111

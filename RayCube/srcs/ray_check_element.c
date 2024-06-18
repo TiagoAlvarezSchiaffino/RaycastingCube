@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 05:54:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:01:33 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:10:01 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	get_element(t_gm *gm, char **split)
 		set_texture(&gm->map.s_img, gm->mlx, split);
 	else if (ft_strcmp(split[0], "WE") == 0)
 		set_texture(&gm->map.w_img, gm->mlx, split);
+	else if (ft_strcmp(split[0], "D") == 0)
+		set_texture(&gm->map.d_img, gm->mlx, split);
 	else if (ft_strcmp(split[0], "F") == 0)
 		set_color(&gm->map.f_rgb, split);
 	else if (ft_strcmp(split[0], "C") == 0)

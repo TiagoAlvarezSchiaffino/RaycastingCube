@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/17 22:17:03 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:08:23 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ typedef struct s_win
 	t_vct	size;
 }	t_win;
 
+/* Door struct */
+typedef struct s_door
+{
+	t_vct			pos;
+	struct s_door	*next;
+}	t_door;
+
 /* Map struct */
 typedef struct s_map
 {
@@ -72,10 +79,13 @@ typedef struct s_map
 	t_img	e_img;
 	t_img	s_img;
 	t_img	w_img;
+	t_img	d_img;
+	t_list	*door;
 	char	**map;
 	t_vct	size;
 }	t_map;
 
+/* Player struct */
 typedef struct s_ply
 {
 	enum
@@ -120,5 +130,6 @@ void	ray_hooks(t_gm *gm);
 // Temp (TO DELETE)
 void	print_ll(t_list **list);
 void	print_da(char **array);
+void	print_dl(t_list **list);
 
 #endif
