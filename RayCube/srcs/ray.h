@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:39:17 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:46:26 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ int		ray_fail_exit(char *msg, char *details);
 int		ray_success_exit(void);
 
 void	ray_hooks(t_gm *gm);
+
+int		ray_user_input(int keycode, t_gm *gm);
 
 // Temp (TO DELETE)
 void	print_ll(t_list **list);
