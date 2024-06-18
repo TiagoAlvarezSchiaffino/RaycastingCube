@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:49:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:12:29 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:34:06 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	get_ply_dir(t_gm *gm, int x, int y)
 		|| gm->map.map[y][x] == 'S' || gm->map.map[y][x] == 'W')
 	{
 		if (gm->ply.e_dir != NOTSET)
-			ray_fail_exit("Duplicated player position in map");
+			ray_fail_exit("Duplicated player position in map", NULL);
 		if (gm->map.map[y][x] == 'N')
 			gm->ply.e_dir = NORTH;
 		else if (gm->map.map[y][x] == 'E')
@@ -76,7 +76,7 @@ void	ray_check_map(t_gm *gm, int x, int y)
 		error += check_square(gm, x, y + 1);
 		error += check_square(gm, x, y - 1);
 		if (error)
-			ray_fail_exit("Map not surrounded by walls");
+			ray_fail_exit("Map not surrounded by walls", NULL);
 	}
 	ray_check_map(gm, x + 1, y);
 	if (x == 0)

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:08:23 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:19:25 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		ray_is_all_num(char *str1, char *str2, char *str3);
 void	ray_trim_spaces(char *str, int len);
 char	*ray_pad_spaces(t_gm *gm, char *str);
 
-int		ray_fail_exit(char *str);
+int		ray_fail_exit(char *msg, char *details);
 int		ray_success_exit(void);
 
 void	ray_hooks(t_gm *gm);

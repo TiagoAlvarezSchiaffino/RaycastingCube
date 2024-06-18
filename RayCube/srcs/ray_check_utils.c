@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:31:04 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:13:58 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:21:14 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ray_all_elements_present(t_gm *gm)
 	if (!gm->map.n_img.ref || !gm->map.e_img.ref
 		|| !gm->map.s_img.ref || !gm->map.w_img.ref
 		|| gm->map.c_rgb.hex < 0 || gm->map.f_rgb.hex < 0)
-		ray_fail_exit("Missing element");
+		ray_fail_exit("Missing element", NULL);
 }
 
 int	ray_map_contents_only(char *str)

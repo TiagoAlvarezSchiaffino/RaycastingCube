@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 07:58:40 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/17 22:32:24 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:24:55 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	ray_get_map(t_gm *gm, char *str, int fd)
 
 	if (ray_map_contents_only(str) == 0)
 	{
-		free(str);
 		if (mapmode && str != NULL)
-			ray_fail_exit("Invalid character in map");
+			ray_fail_exit("Invalid character in map", str);
+		free(str);
 		return ;
 	}
 	ray_all_elements_present(gm);
