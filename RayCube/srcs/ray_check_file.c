@@ -8,29 +8,11 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:03:19 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/15 07:53:31 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:02:48 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
-
-/**
- * - Map must be closed/surrounded by walls, else return an error.
- * - Except for map content, each type of element can be separated by one or more
- * empty lines
- * - Except for the map content which always has to be the last, each type of
- * element can be set in any order in the file.
- * - Except for the map, each type of information from an element can be
- * separated by one or more space(s)
- * 
- * NO ./path_to_the_north_texture
- * SO ./path_to_the_south_texture
- * WE ./path_to_the_south_texture
- * EA ./path_to_the_south_texture
- * 
- * F 0,123,255
- * C 0,123,255
- */
 
 static void	check_file_format(int ac, char **av)
 {
@@ -47,4 +29,8 @@ void	ray_check_file(t_gm *gm, int ac, char **av)
 {
 	check_file_format(ac, av);
 	ray_check_element(gm, av);
+	if (gm->map.map != NULL)
+		ray_check_map(gm, 0, 0);
+	if (gm->ply.e_dir == NOTSET)
+		ray_fail_exit("No player set in map");
 }

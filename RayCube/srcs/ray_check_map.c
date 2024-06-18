@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:49:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/17 22:29:40 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/18 08:03:09 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static int	check_square(t_gm *gm, int x, int y)
 {
 	if (y < 0 || y >= gm->map.size.y || x < 0 || x >= gm->map.size.x)
-		return (0);
+		return (1);
 	return (gm->map.map[y][x] != '1' && gm->map.map[y][x] != '0'
 		&& gm->map.map[y][x] != 'N' && gm->map.map[y][x] != 'E'
 		&& gm->map.map[y][x] != 'S' && gm->map.map[y][x] != 'W');
