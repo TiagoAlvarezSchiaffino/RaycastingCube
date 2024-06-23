@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/18 08:45:15 by Tiago                 /_____/ U          #
+#   Updated: 2024/06/23 06:55:11 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
@@ -23,7 +23,9 @@ SRCS_FILES	=	ray_main \
 				ray_hook \
 				ray_exit \
 				ray_init \
+				ray_display \
 				ray_get_map \
+				ray_minimap \
 				ray_check_map \
 				ray_check_file \
 				ray_user_input \

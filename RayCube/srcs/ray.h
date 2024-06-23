@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:46:26 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 07:01:27 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/srcs/libft.h"
 # include <stdio.h>
 # include <mlx.h>
+# include <math.h>
 
 /* Mac key codes */
 # define KEY_ESC	53
@@ -30,9 +31,19 @@
 # define EXIT_EVENT	17
 # define EXIT_MASK	0
 
+/* Map settings */
+# define WIN_W		1280
+# define WIN_H		800
+# define MMAP_W		10
+# define MMAP_H		10
+# define MMAP_PX	16
+
 /* Player prefs */
-# define WIN_H		1280
-# define WIN_W		800
+# define PLY_MVSPD	32
+
+# define BROWN		0x964B00
+# define BLUE		0x0000FF
+# define WHITE		0xFFFFFF
 
 /**
  * @brief Double vector struct
@@ -141,6 +152,24 @@ typedef struct s_map
 }	t_map;
 
 /**
+ * @brief Minimap struct
+ * 
+ * @param ref Minimap image reference
+ * @param addr Address of map Image
+ * @param bpp Bits per pixel of map image
+ * @param sl Size line of map image
+ * @param end Endian of map image
+ */
+typedef struct s_mini
+{
+	void	*ref;
+	char	*addr;
+	int		bpp;
+	int		sl;
+	int		end;
+}	t_mini;
+
+/**
  * @brief Player struct
  * 
  * @param e_dir Direction player is facing at in enum
@@ -159,6 +188,7 @@ typedef struct s_ply
 	}	e_dir;
 	t_dvct	dir;
 	t_dvct	pos;
+	t_dvct	plane;
 }	t_ply;
 
 /**
@@ -175,6 +205,7 @@ typedef struct s_gm
 	t_win	win;
 	t_map	map;
 	t_ply	ply;
+	t_mini	*mini;
 }	t_gm;
 
 void	ray_init_gm(t_gm *gm);
@@ -197,6 +228,9 @@ int		ray_success_exit(void);
 void	ray_hooks(t_gm *gm);
 
 int		ray_user_input(int keycode, t_gm *gm);
+
+int		ray_display(t_gm *gm);
+void	ray_display_minimap(t_gm *gm);
 
 // Temp (TO DELETE)
 void	print_ll(t_list **list);
