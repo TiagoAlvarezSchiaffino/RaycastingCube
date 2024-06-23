@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:34:28 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 07:57:08 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 
 /* Player prefs */
 # define PLY_MVSPD	0.25
+# define PLY_ROTSPD	0.0625
 
 # define RED		0xFF0000
 # define GREEN		0x00FF00
