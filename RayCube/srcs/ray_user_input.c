@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/18 08:47:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 08:02:44 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 08:03:01 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ray_user_input(int keycode, t_gm *gm)
 {
 	if (keycode == KEY_ESC)
 		ray_success_exit();
-	mlx_clear_window(gm->mlx, gm->win.ref);
+	// mlx_clear_window(gm->mlx, gm->win.ref);
 	player_movement(gm, keycode);
 	system_command(gm, keycode);
 	ray_display_minimap(gm);
