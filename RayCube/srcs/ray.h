@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:01:27 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 07:22:04 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,19 @@ typedef struct s_rgb
  * @brief Image struct
  * 
  * @param ref Image reference
+ * @param addr Address of image
+ * @param bpp Bits per pixel of image
+ * @param sl Size line of image
+ * @param end Endian of image
  * @param size Image size
  */
 typedef struct s_img
 {
 	void	*ref;
+	char	*addr;
+	int		bpp;
+	int		sl;
+	int		end;
 	t_ivct	size;
 }	t_img;
 
@@ -146,28 +154,12 @@ typedef struct s_map
 	t_img	s_img;
 	t_img	w_img;
 	t_img	d_img;
+	t_img	*main;
+	t_img	*mini;
 	t_list	*door;
 	char	**map;
 	t_ivct	size;
 }	t_map;
-
-/**
- * @brief Minimap struct
- * 
- * @param ref Minimap image reference
- * @param addr Address of map Image
- * @param bpp Bits per pixel of map image
- * @param sl Size line of map image
- * @param end Endian of map image
- */
-typedef struct s_mini
-{
-	void	*ref;
-	char	*addr;
-	int		bpp;
-	int		sl;
-	int		end;
-}	t_mini;
 
 /**
  * @brief Player struct
@@ -205,7 +197,6 @@ typedef struct s_gm
 	t_win	win;
 	t_map	map;
 	t_ply	ply;
-	t_mini	*mini;
 }	t_gm;
 
 void	ray_init_gm(t_gm *gm);
@@ -231,6 +222,8 @@ int		ray_user_input(int keycode, t_gm *gm);
 
 int		ray_display(t_gm *gm);
 void	ray_display_minimap(t_gm *gm);
+
+void	ray_draw_block(t_gm *gm, int x, int y, int color);
 
 // Temp (TO DELETE)
 void	print_ll(t_list **list);

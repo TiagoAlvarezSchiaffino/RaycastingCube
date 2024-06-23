@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:11:51 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 07:27:03 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,7 @@ void	ray_init_gm(t_gm *gm)
 	gm->ply.e_dir = NOTSET;
 	gm->ply.plane.x = 0;
 	gm->ply.plane.y = 0.66;
+	gm->map.main = ft_calloc(1, sizeof(t_img));
+	gm->map.mini = ft_calloc(1, sizeof(t_img));
+
 }
