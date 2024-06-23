@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:22:04 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 07:34:28 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,26 @@
 # define KEY_LEFT	123
 # define KEY_RIGHT	124
 # define EXIT_EVENT	17
+# define KD_EVENT	2
+# define KEY_PRESS	1
 # define EXIT_MASK	0
 
 /* Map settings */
 # define WIN_W		1280
 # define WIN_H		800
-# define MMAP_W		10
-# define MMAP_H		10
-# define MMAP_PX	16
+# define MMAP_W		15
+# define MMAP_H		15
+# define MMAP_PX	15
 
 /* Player prefs */
-# define PLY_MVSPD	32
+# define PLY_MVSPD	0.25
 
-# define BROWN		0x964B00
+# define RED		0xFF0000
+# define GREEN		0x00FF00
 # define BLUE		0x0000FF
-# define WHITE		0xFFFFFF
+# define TBROWN		0x80964B00
+# define TGREY		0x80808080
+# define TWHITE		0x80FFFFFF
 
 /**
  * @brief Double vector struct
@@ -223,7 +228,7 @@ int		ray_user_input(int keycode, t_gm *gm);
 int		ray_display(t_gm *gm);
 void	ray_display_minimap(t_gm *gm);
 
-void	ray_draw_block(t_gm *gm, int x, int y, int color);
+void	ray_draw_block(t_gm *gm, int x, int y, unsigned int color);
 
 // Temp (TO DELETE)
 void	print_ll(t_list **list);

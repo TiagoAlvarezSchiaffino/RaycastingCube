@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:09:10 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/23 07:34:51 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ray_render(t_gm *gm)
 		if (draw_end >= WIN_H)
 			draw_end = WIN_H - 1;
 
-		int color = BLUE;
+		int color = GREEN;
 		if (side == 1)
 			color = color / 2;
 		draw_verline(gm, x, draw_start, draw_end, color);
