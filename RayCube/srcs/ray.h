@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:07:14 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 08:16:20 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define TWHITE		0x80FFFFFF
 # define TBLACK		0x80000000
 # define PI			3.14159265359
+# define RAD_90DEG	1.57079632679
 
 /**
  * @brief Double vector struct
@@ -246,7 +247,8 @@ void	ray_display_minimap(t_gm *gm);
 void	ray_color_block(t_gm *gm, t_ivct cur, unsigned int color);
 void	ray_copy_pixel(t_gm *gm, int src_pixel, int x, int y);
 
-void	ray_player_movement(t_gm *gm, int keycode);
+void	ray_player_vertical_movement(t_gm *gm, int keycode);
+void	ray_player_horizontal_movement(t_gm *gm, int keycode);
 void	ray_player_view(t_gm *gm, int keycode);
 void	ray_mouse_state(t_gm *gm, int keycode);
 void	ray_mouse_control(t_gm *gm);
