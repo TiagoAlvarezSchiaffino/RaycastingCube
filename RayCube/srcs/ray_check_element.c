@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 05:54:12 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/18 08:31:43 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 11:03:27 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	set_texture(t_img *img, void *mlx, char **split)
 	if (img->ref != NULL)
 		ray_fail_exit("Duplicated texture found", split[0]);
 	img->ref = mlx_xpm_file_to_image(mlx, split[1], &img->size.x, &img->size.y);
+	img->addr = mlx_get_data_addr(img->ref, &img->bpp, &img->sl, &img->end);
 	if (img->ref == NULL || split[2] != NULL)
 		ray_fail_exit("Invalid path set for texture", split[0]);
 }

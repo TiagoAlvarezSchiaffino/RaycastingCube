@@ -8,17 +8,34 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:04:01 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 11:14:05 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
+
+static void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->sl + x * (data->bpp / 8));
+	*(unsigned int*)dst = color;
+}
 
 static void	draw_verline(t_gm *gm, int i, int draw_start, int draw_end, int color)
 {
 	while (draw_start < draw_end)
 	{
 		mlx_pixel_put(gm->mlx, gm->win.ref, i, draw_start, color);
+		draw_start++;
+	}
+}
+
+static void	draw_verline2(t_gm *gm, int i, int draw_start, int draw_end, int color)
+{
+	while (draw_start < draw_end)
+	{
+		my_mlx_pixel_put(&gm->map.test, i, draw_start, color);
 		draw_start++;
 	}
 }
@@ -117,7 +134,11 @@ void	ray_render(t_gm *gm)
 		}
 		if (side == 1)
 			color = color / 2;
-		draw_verline(gm, x, draw_start, draw_end, color);
+		// char	*dst;
+
+		// dst = gm->map.n_img.addr + (5 * gm->map.n_img.sl + 5 * (gm->map.n_img.bpp / 8));
+		// *(unsigned int*)dst = color;
+		draw_verline2(gm, x, draw_start, draw_end, color);
 		// drawBuffer(gm, x, draw_start, draw_end);
 
 		//Code here is for sprite texture
@@ -146,15 +167,15 @@ void	ray_render(t_gm *gm)
 		// 	texPos += step;
 		// 	y++;
 		// }
-		// draw_verline(gm, x, draw_start, draw_end, color);
 	}
+	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.test.ref, 0, 0);
 }
 
 int	ray_display(t_gm *gm)
 {
 	if (gm->win.mouse == 0)
 		ray_mouse_control(gm);
-	ray_display_minimap(gm);
+	// ray_display_minimap(gm);
 	ray_render(gm);
 	return (0);
 }
