@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:38:53 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 08:03:21 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@
 # define EXIT_MASK	0
 
 /* Map settings */
-// # define WIN_W		1280
-// # define WIN_H		800
-# define WIN_W		640
-# define WIN_H		400
+# define WIN_W		1280
+# define WIN_H		800
 # define MMAP_W		15
 # define MMAP_H		15
 # define MMAP_PX	15
