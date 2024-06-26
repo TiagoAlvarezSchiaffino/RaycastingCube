@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:25:06 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:27:31 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 08:09:51 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	ray_player_view(t_gm *gm, int keycode)
 		dir_x = gm->ply.dir.x;
 		gm->ply.dir.x = gm->ply.dir.x * cos(rot_spd)
 			- gm->ply.dir.y * sin(rot_spd);
-		gm->ply.dir.y = dir_x * sin(rot_spd)
-			+ gm->ply.dir.y * cos(rot_spd);
+		gm->ply.dir.y = gm->ply.dir.y * cos(rot_spd)
+			+ dir_x * sin(rot_spd);
 		plane_x = gm->ply.plane.x;
 		gm->ply.plane.x = gm->ply.plane.x * cos(rot_spd)
 			- gm->ply.plane.y * sin(rot_spd);
-		gm->ply.plane.y = dir_x * sin(rot_spd)
-			+ gm->ply.plane.y * cos(rot_spd);
+		gm->ply.plane.y = gm->ply.plane.y * cos(rot_spd)
+			+ plane_x * sin(rot_spd);
 	}
 }

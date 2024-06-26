@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:06:53 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:44:41 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 08:07:25 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ray_fail_exit(char *msg, char *details)
 	if (details != NULL)
 		ft_dprintf(2, ": |%s|", details);
 	ft_dprintf(2, "\n");
-	// system("leaks -q cub3D");
+	system("leaks -q cub3D");
 	exit(1);
 	return (1);
 }

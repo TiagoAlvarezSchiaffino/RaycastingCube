@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:03:21 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 08:07:14 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define MMAP_W		15
 # define MMAP_H		15
 # define MMAP_PX	15
-# define texWidth	64
-# define texHeight	64
+# define TEXT_W		64
+# define TEXT_H		64
 
 /* Player prefs */
 # define PLY_MVSPD	0.25
