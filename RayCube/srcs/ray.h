@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:29:10 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 07:38:53 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@
 # define EXIT_MASK	0
 
 /* Map settings */
-# define WIN_W		1280
-# define WIN_H		800
+// # define WIN_W		1280
+// # define WIN_H		800
+# define WIN_W		640
+# define WIN_H		400
 # define MMAP_W		15
 # define MMAP_H		15
 # define MMAP_PX	15
@@ -154,8 +156,11 @@ typedef struct s_door
  * @param s_img South wall texture
  * @param w_img West wall texture
  * @param d_img Door texture
+ * @param main Main image of the map
+ * @param mini Minimap image of the map taken from main
  * @param door Door linked list
- * @param map Map array in 2D
+ * @param map Map array to be rendered in 2D
+ * @param map_in Map array taken from file in 2D 
  * @param size Map size
  */
 typedef struct s_map
@@ -171,6 +176,7 @@ typedef struct s_map
 	t_img	*mini;
 	t_list	*door;
 	char	**map;
+	char	**map_in;
 	t_ivct	size;
 }	t_map;
 
@@ -178,8 +184,10 @@ typedef struct s_map
  * @brief Player struct
  * 
  * @param e_dir Direction player is facing at in enum
- * @param dir Vector direction of where the player facing
+ * @param dir Vector direction of where the player is facing
+ * @param c_dir Constant vector direction of where the player is facing
  * @param pos Position of the player on the map
+ * @param plane	View plane of the player
  */
 typedef struct s_ply
 {
@@ -216,6 +224,8 @@ typedef struct s_gm
 void	ray_init_gm(t_gm *gm);
 
 void	ray_get_map(t_gm *gm, char *str, int fd);
+
+void	ray_orient_map(t_gm *gm);
 
 void	ray_check_file(t_gm *gm, int ac, char **av);
 void	ray_check_element(t_gm *gm, char **av);

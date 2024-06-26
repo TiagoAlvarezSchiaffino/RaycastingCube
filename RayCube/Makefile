@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/23 07:19:45 by Tiago                 /_____/ U          #
+#   Updated: 2024/06/26 07:36:29 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_FILES	=	ray_main \
 				ray_get_map \
 				ray_minimap \
 				ray_check_map \
+				ray_orient_map \
 				ray_check_file \
 				ray_image_utils \
 				ray_check_utils \

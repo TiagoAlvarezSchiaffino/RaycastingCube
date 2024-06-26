@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:12:50 by Tiago                     /   (_____/    */
-/*   Updated: 2024/06/23 07:47:05 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 07:48:11 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,59 +16,86 @@
 
 static void	create_map(t_gm *gm)
 {
-	int	x;
-	int	y;
+	t_ivct	cur;
 
 	gm->map.main->ref = mlx_new_image(gm->mlx, gm->map.size.x * MMAP_PX,
 			gm->map.size.y * MMAP_PX);
 	gm->map.main->addr = mlx_get_data_addr(gm->map.main->ref,
 			&gm->map.main->bpp, &gm->map.main->sl, &gm->map.main->end);
-	y = -1;
-	while (++y < gm->map.size.y)
+	cur.y = -1;
+	while (++cur.y < gm->map.size.y)
 	{
-		x = -1;
-		while (++x < gm->map.size.x)
+		cur.x = -1;
+		while (++cur.x < gm->map.size.x)
 		{
-			if (gm->map.map[y][x] == '1')
-				ray_draw_block(gm, x, y, TWHITE);
-			else if (gm->map.map[y][x] == '0')
-				ray_draw_block(gm, x, y, TGREY);
-			else if (gm->map.map[y][x] == 'D')
-				ray_draw_block(gm, x, y, TBROWN);
+			if (gm->map.map[cur.y][cur.x] == '1')
+				ray_color_block(gm, cur, TWHITE);
+			else if (gm->map.map[cur.y][cur.x] == ' ')
+				ray_color_block(gm, cur, TBLACK);
+			else if (gm->map.map[cur.y][cur.x] == 'D')
+				ray_color_block(gm, cur, TBROWN);
+			else
+				ray_color_block(gm, cur, TGREY);
 		}
 	}
 }
 
-// static void	copy_pixel(t_gm *gm, int pixel_in)
-// {
-// 	static int	x;
-// 	static int	y;
-// 	int			pixel;
-	
-// }
+static void	copy_pixel(t_gm *gm, int src_pixel, int x, int y)
+{
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 0]
+		= gm->map.main->addr[src_pixel + 0];
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 1]
+		= gm->map.main->addr[src_pixel + 1];
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 2]
+		= gm->map.main->addr[src_pixel + 2];
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 3]
+		= gm->map.main->addr[src_pixel + 3];
+}
 
 static void	create_minimap(t_gm *gm)
 {
-	int	x;
-	int	y;
-	int	max_x;
-	int	max_y;
+	t_ivct	cur;
+	t_ivct	max;
+	t_ivct	min;
 
-	gm->map.mini->ref = mlx_new_image(gm->mlx, gm->map.size.x * MMAP_PX,
-			gm->map.size.y * MMAP_PX);
+	gm->map.mini->ref = mlx_new_image(gm->mlx,
+			MMAP_W * MMAP_PX, MMAP_W * MMAP_PX);
 	gm->map.mini->addr = mlx_get_data_addr(gm->map.mini->ref,
 			&gm->map.mini->bpp, &gm->map.mini->sl, &gm->map.mini->end);
-	x = (gm->ply.pos.x * MMAP_PX) - (MMAP_PX * (MMAP_W / 2)) - 1;
-	max_x = (gm->ply.pos.x * MMAP_PX) + (MMAP_PX * ((MMAP_W / 2) + 1));
-	while (++x <= max_x)
+	min.y = (gm->ply.pos.y * MMAP_PX) - (MMAP_PX * (MMAP_H / 2)) - 1;
+	max.y = (gm->ply.pos.y * MMAP_PX) + (MMAP_PX * ((MMAP_H / 2) + 1));
+	min.x = (gm->ply.pos.x * MMAP_PX) - (MMAP_PX * (MMAP_W / 2)) - 1;
+	max.x = (gm->ply.pos.x * MMAP_PX) + (MMAP_PX * ((MMAP_W / 2) + 1));
+	cur.y = min.y;
+	while (++cur.y < max.y)
 	{
-		y = (gm->ply.pos.y * MMAP_PX) - (MMAP_PX * (MMAP_H / 2)) - 1;
-		max_y = (gm->ply.pos.y * MMAP_PX) + (MMAP_PX * ((MMAP_H / 2) + 1));
-		while (++y <= max_y)
+		cur.x = min.x;
+		while (++cur.x < max.x)
 		{
-			// copy_pixel(gm, (y * gm->map.mini->sl) + (x * 4));
+			if (cur.x >= 0 && cur.y >= 0
+				&& cur.x <= (gm->map.size.x * MMAP_PX) - 1
+				&& cur.y <= (gm->map.size.y * MMAP_PX) - 1)
+				copy_pixel(gm, (cur.y * gm->map.main->sl) + (cur.x * 4),
+					cur.x - min.x - 1, cur.y - min.y - 1);
 		}
 	}
+}
+
+static void	draw_player(t_gm *gm)
+{
+	t_ivct	pos;
+
+	pos.x = MMAP_W * MMAP_PX / 2;
+	pos.y = MMAP_H * MMAP_PX / 2;
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x - 1, pos.y - 1, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x, pos.y - 1, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x + 1, pos.y - 1, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x - 1, pos.y, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x, pos.y, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x + 1, pos.y, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x - 1, pos.y + 1, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x, pos.y + 1, GREEN);
+	mlx_pixel_put(gm->mlx, gm->win.ref, pos.x + 1, pos.y + 1, GREEN);
 }
 
 void	ray_display_minimap(t_gm *gm)
@@ -76,9 +103,6 @@ void	ray_display_minimap(t_gm *gm)
 	create_map(gm);
 	create_minimap(gm);
 	mlx_clear_window(gm->mlx, gm->win.ref);
-	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.n_img.ref, 500, 0);
-	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.main->ref, 0, 0);
-	mlx_pixel_put(gm->mlx, gm->win.ref, gm->ply.pos.x * 15 + 7,
-		gm->ply.pos.y * 15 + 7, GREEN);
-	return ;
+	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.mini->ref, 0, 0);
+	draw_player(gm);
 }

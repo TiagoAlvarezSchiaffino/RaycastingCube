@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:34:18 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 07:44:27 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	draw_verline(t_gm *gm, int i, int draw_start, int draw_end, int colo
 	}
 }
 
-static void	drawBuffer(t_gm *gm, int i, int draw_start, int draw_end)
+void	drawBuffer(t_gm *gm, int i, int draw_start, int draw_end)
 {
 	// static int	test = 0;
 	// if (test == 0)
@@ -167,9 +167,10 @@ void	ray_render(t_gm *gm)
 
 int	ray_display(t_gm *gm)
 {
+	if (gm->win.mouse == 0)
+		ray_mouse_control(gm);
 	ray_display_minimap(gm);
 	ray_render(gm);
-	printf("Hi\n");
 	// mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.n_img.ref,
 	// 	500, 500);
 	return (0);
