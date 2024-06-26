@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:56:30 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 07:14:20 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void	ray_render(t_gm *gm)
 
 int	ray_display(t_gm *gm)
 {
+	if (gm->win.mouse == 0)
+		ray_mouse_control(gm);
 	ray_render(gm);
 	ray_display_minimap(gm);
 	return (0);

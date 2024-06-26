@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:57:08 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 07:11:24 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # define RAY_H
 
 # include "../libft/srcs/libft.h"
+# include "../mlx/mlx.h"
 # include <stdio.h>
-# include <mlx.h>
 # include <math.h>
 
 /* Mac key codes */
@@ -26,6 +26,7 @@
 # define KEY_A		0
 # define KEY_S		1
 # define KEY_D		2
+# define KEY_M		46
 # define KEY_LEFT	123
 # define KEY_RIGHT	124
 # define EXIT_EVENT	17
@@ -44,12 +45,15 @@
 # define PLY_MVSPD	0.25
 # define PLY_ROTSPD	0.0625
 
+/* Self defined */
 # define RED		0xFF0000
 # define GREEN		0x00FF00
 # define BLUE		0x0000FF
 # define TBROWN		0x80964B00
 # define TGREY		0x80808080
 # define TWHITE		0x80FFFFFF
+# define TBLACK		0x80000000
+# define PI			3.14159265359
 
 /**
  * @brief Double vector struct
@@ -78,10 +82,10 @@ typedef struct s_ivct
 /**
  * @brief RGB struct
  * 
- * @param r red value
- * @param g green value
- * @param b blue value
- * @param hex hex value converted using RGB
+ * @param r Red value
+ * @param g Green value
+ * @param b Blue value
+ * @param hex Hex value converted using RGB
  */
 typedef struct s_rgb
 {
@@ -122,6 +126,7 @@ typedef struct s_win
 {
 	void	*ref;
 	int		frame;
+	int		mouse;
 	t_ivct	size;
 }	t_win;
 
@@ -185,6 +190,7 @@ typedef struct s_ply
 		WEST
 	}	e_dir;
 	t_dvct	dir;
+	t_dvct	c_dir;
 	t_dvct	pos;
 	t_dvct	plane;
 }	t_ply;
@@ -224,12 +230,16 @@ int		ray_success_exit(void);
 
 void	ray_hooks(t_gm *gm);
 
-int		ray_user_input(int keycode, t_gm *gm);
-
 int		ray_display(t_gm *gm);
 void	ray_display_minimap(t_gm *gm);
 
-void	ray_draw_block(t_gm *gm, int x, int y, unsigned int color);
+void	ray_color_block(t_gm *gm, t_ivct cur, unsigned int color);
+void	ray_copy_pixel(t_gm *gm, int src_pixel, int x, int y);
+
+void	ray_player_movement(t_gm *gm, int keycode);
+void	ray_player_view(t_gm *gm, int keycode);
+void	ray_mouse_state(t_gm *gm, int keycode);
+void	ray_mouse_control(t_gm *gm);
 
 // Temp (TO DELETE)
 void	print_ll(t_list **list);

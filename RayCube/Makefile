@@ -13,30 +13,32 @@
 # ************************************************************************** #
 
 NAME		=	raycube
-LIBFT		=	libft.a
+LIBFT		=	libft/libft.a
+MLX			=	mlx/libmlx.a
 CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
-# CFLAGS		+=	-fsanitize=address -g3
+CFLAGS		+=	-fsanitize=address -g3
 MLXFLAGS	=	-L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 SRCS_FILES	=	ray_main \
 				ray_hook \
 				ray_exit \
 				ray_init \
+				ray_mouse \
 				ray_display \
 				ray_get_map \
 				ray_minimap \
 				ray_check_map \
 				ray_check_file \
-				ray_user_input \
 				ray_image_utils \
 				ray_check_utils \
 				ray_check_element \
+				ray_player_control \
 				temp
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
-LIBFT_DIR	=	libft
+LIBFT_DIR	=	libft/
 OBJS_DIR	=	objs/
 
 all:			
@@ -48,7 +50,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 				$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJS)
-				$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(OBJS) $(MLXFLAGS) -o $(NAME)
+				$(CC) $(CFLAGS) $(LIBFT) $(MLX) $(OBJS) $(MLXFLAGS) -o $(NAME)
 
 libft:
 				make -C $(LIBFT_DIR)
