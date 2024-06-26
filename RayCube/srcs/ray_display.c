@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:44:27 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/26 08:02:38 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,7 @@ static void	draw_verline(t_gm *gm, int i, int draw_start, int draw_end, int colo
 {
 	while (draw_start < draw_end)
 	{
-		// mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.n_img.ref,
-			// i, draw_start);
 		mlx_pixel_put(gm->mlx, gm->win.ref, i, draw_start, color);
-		draw_start++;
-	}
-}
-
-void	drawBuffer(t_gm *gm, int i, int draw_start, int draw_end)
-{
-	// static int	test = 0;
-	// if (test == 0)
-	// {
-		// printf("Hello i is: %d\n", i);
-		// printf("And start is: %d\n", draw_start);
-	while (draw_start < draw_end)
-	{
-		mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.n_img.ref,
-			i, draw_start);
-		// test++;
 		draw_start++;
 	}
 }
@@ -139,6 +121,8 @@ void	ray_render(t_gm *gm)
 		// drawBuffer(gm, x, draw_start, draw_end);
 
 		//Code here is for sprite texture
+		// unsigned int buffer[WIN_H][WIN_W];
+		// unsigned int color;
 		// int	texNum = gm->map.map[map_y][map_x] - 1;
 		// double	wallX;
 		// if (side == 0)
@@ -157,21 +141,18 @@ void	ray_render(t_gm *gm)
 		// int y = draw_start;
 		// while (y < draw_end)
 		// {
-		// 	// int texY = (int)texPos & (texHeight - 1);
+		// 	int texY = (int)texPos & (texHeight - 1);
+		// 	color = RED;
 		// 	texPos += step;
 		// 	y++;
 		// }
-		// drawBuffer(gm, x, draw_start, draw_end);
+		// draw_verline(gm, x, draw_start, draw_end, color);
 	}
 }
 
 int	ray_display(t_gm *gm)
 {
-	if (gm->win.mouse == 0)
-		ray_mouse_control(gm);
 	ray_display_minimap(gm);
 	ray_render(gm);
-	// mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.n_img.ref,
-	// 	500, 500);
 	return (0);
 }
