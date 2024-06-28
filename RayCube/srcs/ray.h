@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 05:51:33 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:19:27 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define TGREY		0x80808080
 # define TWHITE		0x80FFFFFF
 # define TBLACK		0x80000000
+# define TRANS		0xFF000000
 # define PI			3.14159265359
 # define RAD_90DEG	1.57079632679
 
@@ -161,7 +162,7 @@ typedef struct s_door
  * @param mini Minimap image of the map taken from main
  * @param door Door linked list
  * @param map Map array to be rendered in 2D
- * @param map_in Map array taken from file in 2D 
+ * @param map_raw Map array taken from file in 2D
  * @param size Map size
  */
 typedef struct s_map
@@ -177,7 +178,7 @@ typedef struct s_map
 	t_img	*mini;
 	t_list	*door;
 	char	**map;
-	char	**map_in;
+	char	**map_raw;
 	t_ivct	size;
 	t_img	imgw;
 }	t_map;
@@ -268,6 +269,8 @@ void	ray_display_minimap(t_gm *gm);
 
 void	ray_color_block(t_gm *gm, t_ivct cur, unsigned int color);
 void	ray_copy_pixel(t_gm *gm, int src_pixel, int x, int y);
+void	ray_color_image(t_gm *gm, t_img *img, int color);
+char	**ray_dup_map(char **map, int height);
 
 void	ray_player_vertical_movement(t_gm *gm, int keycode);
 void	ray_player_horizontal_movement(t_gm *gm, int keycode);

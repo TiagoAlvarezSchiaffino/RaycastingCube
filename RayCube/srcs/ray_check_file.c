@@ -8,11 +8,23 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:03:19 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 07:39:12 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:20:44 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
+
+char	**ray_dup_map(char **map, int height)
+{
+	int		y;
+	char	**output;
+
+	output = ft_calloc(height + 1, sizeof(char *));
+	y = -1;
+	while (++y < height)
+		output[y] = ft_strdup(map[y]);
+	return (output);
+}
 
 static void	check_file_format(int ac, char **av)
 {
@@ -33,5 +45,6 @@ void	ray_check_file(t_gm *gm, int ac, char **av)
 		ray_check_map(gm, 0, 0);
 	if (gm->ply.e_dir == NOTSET)
 		ray_fail_exit("No player set in map", NULL);
+	gm->map.map_raw = ray_dup_map(gm->map.map, gm->map.size.y);
 	ray_orient_map(gm);
 }

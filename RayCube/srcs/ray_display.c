@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:11:24 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:21:16 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ray_render(t_gm *gm)
 				gm->render.side = 1;
 			}
 
-			if (gm->map.map[(int)gm->render.map_y][(int)gm->render.map_x] == '1')
+			if (gm->map.map_raw[(int)gm->render.map_y][(int)gm->render.map_x] == '1')
 				gm->render.hit = 1;
 		}
 
