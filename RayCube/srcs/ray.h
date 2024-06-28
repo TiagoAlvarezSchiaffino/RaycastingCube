@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:34:42 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:37:20 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define PLY_ROTSPD	0.0625
 # define PLY_NEGCOL	0.5
 # define PLY_POSCOL	0.25
+# define PLY_PLANEX	0
+# define PLY_PLANEY	1
 
 /* Self defined */
 # define RED		0xFF0000
@@ -249,7 +251,6 @@ void	ray_get_map(t_gm *gm, char *str, int fd);
 void	ray_orient_map(t_gm *gm);
 
 void	ray_check_file(t_gm *gm, int ac, char **av);
-void	ray_check_element(t_gm *gm, char **av);
 void	ray_check_map(t_gm *gm, int x, int y);
 
 void	ray_all_elements_present(t_gm *gm);

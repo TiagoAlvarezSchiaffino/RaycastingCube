@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/28 06:34:10 by Tiago                 /_____/ U          #
+#   Updated: 2024/06/28 06:37:19 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
@@ -32,7 +32,6 @@ SRCS_FILES	=	ray_main \
 				ray_check_file \
 				ray_image_utils \
 				ray_check_utils \
-				ray_check_element \
 				ray_player_control \
 				temp
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
