@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:25:06 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:00:24 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:14:17 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ray_player_vertical_movement(t_gm *gm, int keycode)
 {
 	t_dvct	new;
 
-	if (keycode == KEY_D)
+	if (keycode == KEY_A)
 	{
 		new.x = gm->ply.pos.x + (gm->ply.dir.x * (PLY_MVSPD));
 		new.y = gm->ply.pos.y + (gm->ply.dir.y * (PLY_MVSPD));
@@ -43,7 +43,7 @@ void	ray_player_vertical_movement(t_gm *gm, int keycode)
 			gm->ply.pos.y = new.y;
 		}
 	}
-	else if (keycode == KEY_A)
+	else if (keycode == KEY_D)
 	{
 		new.x = gm->ply.pos.x - (gm->ply.dir.x * (PLY_MVSPD));
 		new.y = gm->ply.pos.y - (gm->ply.dir.y * (PLY_MVSPD));
@@ -61,7 +61,7 @@ void	ray_player_horizontal_movement(t_gm *gm, int keycode)
 	t_dvct	new;
 
 	rad = RAD_90DEG;
-	if (keycode == KEY_W)
+	if (keycode == KEY_S)
 		rad = -RAD_90DEG;
 	if (keycode == KEY_S || keycode == KEY_W)
 	{
@@ -69,12 +69,12 @@ void	ray_player_horizontal_movement(t_gm *gm, int keycode)
 				- gm->ply.dir.y * sin(rad) * (PLY_MVSPD));
 		new.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
 				+ gm->ply.dir.x * sin(rad) * (PLY_MVSPD));
-		if (keycode == KEY_W && collision(gm, new, PLY_POSCOL) == 0)
+		if (keycode == KEY_S && collision(gm, new, PLY_POSCOL) == 0)
 		{
 			gm->ply.pos.x = new.x;
 			gm->ply.pos.y = new.y;
 		}
-		else if (keycode == KEY_S && collision(gm, new, PLY_NEGCOL) == 0)
+		else if (keycode == KEY_W && collision(gm, new, PLY_NEGCOL) == 0)
 		{
 			gm->ply.pos.x = new.x;
 			gm->ply.pos.y = new.y;
@@ -88,9 +88,9 @@ void	ray_player_view(t_gm *gm, int keycode)
 	double	plane_x;
 	double	rot_spd;
 
-	rot_spd = PLY_ROTSPD;
+	rot_spd = -PLY_ROTSPD;
 	if (keycode == KEY_LEFT)
-		rot_spd = -PLY_ROTSPD;
+		rot_spd = PLY_ROTSPD;
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 	{
 		dir_x = gm->ply.dir.x;

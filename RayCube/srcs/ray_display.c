@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:08:35 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:11:24 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	ray_render(t_gm *gm)
 				gm->render.side = 1;
 			}
 
-			// print_da(gm->map.map);
 			if (gm->map.map[(int)gm->render.map_y][(int)gm->render.map_x] == '1')
 				gm->render.hit = 1;
 		}
@@ -120,16 +119,16 @@ void	ray_render(t_gm *gm)
 		if (gm->render.side == 0)
 		{
 			if (gm->render.step_x == 1)
-				curimg = &gm->map.n_img;
+				curimg = &gm->map.w_img;
 			else
-				curimg = &gm->map.s_img;
+				curimg = &gm->map.e_img;
 		}
 		else
 		{
 			if (gm->render.step_y == 1)
-				curimg = &gm->map.w_img;
+				curimg = &gm->map.s_img;
 			else
-				curimg = &gm->map.e_img;
+				curimg = &gm->map.n_img;
 		}
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit
@@ -142,16 +141,16 @@ void	ray_render(t_gm *gm)
 		if(gm->render.side == 0)
 		{
 			if (gm->render.raydir_x > 0)
-				texX = curimg->size.x - (curimg->size.x - texX - 1);
-			else
 				texX = curimg->size.x - texX - 1;
+			else
+				texX = curimg->size.x - (curimg->size.x - texX - 1);
 		}
 		if(gm->render.side == 1) 
 		{
 			if (gm->render.raydir_y < 0)
-				texX = curimg->size.x - (curimg->size.x - texX - 1);
-			else
 				texX = curimg->size.x - texX - 1;
+			else
+				texX = curimg->size.x - (curimg->size.x - texX - 1);
 		}
 		draw_verline(curimg, x, draw_start, draw_end, texX, gm);
 	}
