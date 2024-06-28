@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:55:35 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 07:04:03 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ static void	init_ply(t_gm *gm)
 {
 	gm->ply.e_dir = NOTSET;
 	// Below not needed anymore since initalized at check_map.c
-	gm->ply.plane.x = PLY_PLANEX;
-	gm->ply.plane.y = PLY_PLANEY;
-	gm->ply.dir.x = -1;
-	gm->ply.dir.y = 0;
+	gm->ply.plane.x = 0;
+	gm->ply.plane.y = 0;
 }
 
 void	ray_init_gm(t_gm *gm)
