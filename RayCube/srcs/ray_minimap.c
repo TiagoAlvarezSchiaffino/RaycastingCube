@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:12:50 by Tiago                     /   (_____/    */
-/*   Updated: 2024/06/26 07:48:11 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:27:21 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	ray_display_minimap(t_gm *gm)
 {
 	create_map(gm);
 	create_minimap(gm);
-	mlx_clear_window(gm->mlx, gm->win.ref);
 	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.mini->ref, 0, 0);
 	draw_player(gm);
 }

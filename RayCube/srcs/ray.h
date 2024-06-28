@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 11:02:30 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:13:05 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ typedef struct s_map
 	char	**map;
 	char	**map_in;
 	t_ivct	size;
-	t_img	test;
+	t_img	imgw;
 }	t_map;
 
 /**

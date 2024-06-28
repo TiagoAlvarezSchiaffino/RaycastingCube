@@ -1,4 +1,4 @@
-NO ./sprites/north_1x1.xpm
+NO ./sprites/north.xpm
 EA ./sprites/east.xpm
 SO ./sprites/south.xpm
 WE ./sprites/west.xpm

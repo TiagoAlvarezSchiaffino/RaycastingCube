@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 11:14:05 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:27:12 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,39 @@ static void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	draw_verline(t_gm *gm, int i, int draw_start, int draw_end, int color)
-{
-	while (draw_start < draw_end)
-	{
-		mlx_pixel_put(gm->mlx, gm->win.ref, i, draw_start, color);
-		draw_start++;
-	}
-}
+// static void	draw_verline(t_gm *gm, int i, int draw_start, int draw_end, int color)
+// {
+// 	while (draw_start < draw_end)
+// 	{
+// 		mlx_pixel_put(gm->mlx, gm->win.ref, i, draw_start, color);
+// 		draw_start++;
+// 	}
+// }
 
-static void	draw_verline2(t_gm *gm, int i, int draw_start, int draw_end, int color)
+static void	draw_verline2(t_img *img, int i, int draw_start, int draw_end, int color, t_gm *gm)
 {
+	char	*dest;
+	int		y;
+	int		newcolor;
+
+	y = 0;
 	while (draw_start < draw_end)
 	{
-		my_mlx_pixel_put(&gm->map.test, i, draw_start, color);
+		dest = img->addr + (y * img->sl + color * (img->bpp / 8));
+		newcolor = *(unsigned int *)dest;
+		my_mlx_pixel_put(&gm->map.imgw, i, draw_start, newcolor);
 		draw_start++;
+		y++;
+		if (y >= img->size.y - 1)
+			 y = 0;
 	}
 }
 
 void	ray_render(t_gm *gm)
 {
+	t_img	*curimg;
 	int	x;
+	int	i = 0;
 
 	x = -1;
 	while (++x < WIN_W)
@@ -132,50 +144,34 @@ void	ray_render(t_gm *gm)
 			case 4:  color = TWHITE;  break; //white
 			default: color = TBROWN; break; //yellow
 		}
-		if (side == 1)
-			color = color / 2;
-		// char	*dst;
-
-		// dst = gm->map.n_img.addr + (5 * gm->map.n_img.sl + 5 * (gm->map.n_img.bpp / 8));
-		// *(unsigned int*)dst = color;
-		draw_verline2(gm, x, draw_start, draw_end, color);
-		// drawBuffer(gm, x, draw_start, draw_end);
-
-		//Code here is for sprite texture
-		// unsigned int buffer[WIN_H][WIN_W];
-		// unsigned int color;
-		// int	texNum = gm->map.map[map_y][map_x] - 1;
-		// double	wallX;
-		// if (side == 0)
-		// 	wallX = gm->ply.pos.y + perp_wall_dist * rayDirY;
-		// else
-		// 	wallX = gm->ply.pos.x + perp_wall_dist * rayDirX;
-		// wallX -= floor((wallX));
-		// int	texX = (int)(wallX * (double)texWidth);
-		// if (side == 0 && rayDirX > 0)
-		// 	texX = texWidth - texX - 1;
-		// if (side == 1 && rayDirY < 0)
-		// 	texX = texWidth - texX - 1;
-		
-		// double step = 1.0 * texHeight / line_height;
-		// double texPos = (draw_start - WIN_H / 2 + line_height / 2) * step;
-		// int y = draw_start;
-		// while (y < draw_end)
-		// {
-		// 	int texY = (int)texPos & (texHeight - 1);
-		// 	color = RED;
-		// 	texPos += step;
-		// 	y++;
-		// }
+		if (side == 0)
+		{
+			if (step_x == 1)
+				curimg = &gm->map.n_img;
+			else
+				curimg = &gm->map.s_img;
+		}
+		else
+		{
+			if (step_y == 1)
+				curimg = &gm->map.w_img;
+			else
+				curimg = &gm->map.e_img;
+		}
+		draw_verline2(curimg, x, draw_start, draw_end, i, gm);
+		i++;
+		if (i >= gm->map.n_img.size.x - 1)
+			i = 0;
 	}
-	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.test.ref, 0, 0);
+	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.imgw.ref, 0, 0);
 }
 
 int	ray_display(t_gm *gm)
 {
+	mlx_clear_window(gm->mlx, gm->win.ref);
 	if (gm->win.mouse == 0)
 		ray_mouse_control(gm);
-	// ray_display_minimap(gm);
 	ray_render(gm);
+	ray_display_minimap(gm);
 	return (0);
 }
