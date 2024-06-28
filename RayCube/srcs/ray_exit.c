@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:06:53 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:07:25 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:25:28 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ray_fail_exit(char *msg, char *details)
 int	ray_success_exit(void)
 {
 	printf("Thanks for playing!\n");
-	system("leaks -q cub3D");
+	// system("leaks -q cub3D");
 	exit(0);
 	return (0);
 }

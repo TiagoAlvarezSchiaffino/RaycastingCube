@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:21:16 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:28:41 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,16 +119,16 @@ void	ray_render(t_gm *gm)
 		if (gm->render.side == 0)
 		{
 			if (gm->render.step_x == 1)
-				curimg = &gm->map.w_img;
-			else
 				curimg = &gm->map.e_img;
+			else
+				curimg = &gm->map.w_img;
 		}
 		else
 		{
 			if (gm->render.step_y == 1)
-				curimg = &gm->map.s_img;
-			else
 				curimg = &gm->map.n_img;
+			else
+				curimg = &gm->map.s_img;
 		}
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit

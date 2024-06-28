@@ -8,13 +8,13 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:49:06 by Tiago                     /   (_____/    */
-/*   Updated: 2024/06/28 06:25:20 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:33:53 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-static void	replace_map(t_gm *gm, char **old_map, t_ivct old, t_ivct new)
+void	replace_map(t_gm *gm, char **old_map, t_ivct old, t_ivct new)
 {
 	while (++old.x < gm->map.size.x)
 	{
@@ -24,14 +24,14 @@ static void	replace_map(t_gm *gm, char **old_map, t_ivct old, t_ivct new)
 		while (--old.y >= 0)
 		{
 			gm->map.map[new.y][new.x] = old_map[old.y][old.x];
-			if (gm->map.map[new.y][new.x] == 'N'
-				|| gm->map.map[new.y][new.x] == 'E'
-				|| gm->map.map[new.y][new.x] == 'S'
-				|| gm->map.map[new.y][new.x] == 'W')
-			{
-				gm->ply.pos.x = new.x;
-				gm->ply.pos.y = new.y;
-			}
+			// if (gm->map.map[new.y][new.x] == 'N'
+			// 	|| gm->map.map[new.y][new.x] == 'E'
+			// 	|| gm->map.map[new.y][new.x] == 'S'
+			// 	|| gm->map.map[new.y][new.x] == 'W')
+			// {
+			// 	gm->ply.pos.x = new.x;
+			// 	gm->ply.pos.y = new.y;
+			// }
 			new.x++;
 		}
 		new.y++;
@@ -39,7 +39,7 @@ static void	replace_map(t_gm *gm, char **old_map, t_ivct old, t_ivct new)
 	gm->map.map[new.y] = 0;
 }
 
-static void	rotate_right(t_gm *gm, char **map, int count)
+void	rotate_right(t_gm *gm, char **map, int count)
 {
 	t_ivct	new;
 	t_ivct	old;
@@ -57,10 +57,11 @@ static void	rotate_right(t_gm *gm, char **map, int count)
 
 void	ray_orient_map(t_gm *gm)
 {
-	if (gm->ply.e_dir == WEST)
-		rotate_right(gm, ray_dup_map(gm->map.map_raw, gm->map.size.y), WEST);
-	else if (gm->ply.e_dir == EAST)
-		rotate_right(gm, ray_dup_map(gm->map.map_raw, gm->map.size.y), EAST);
-	else if (gm->ply.e_dir == SOUTH)
-		rotate_right(gm, ray_dup_map(gm->map.map_raw, gm->map.size.y), SOUTH);
+	// if (gm->ply.e_dir == WEST)
+	// 	rotate_right(gm, ray_dup_map(gm->map.map_raw, gm->map.size.y), WEST);
+	// else if (gm->ply.e_dir == EAST)
+	// 	rotate_right(gm, ray_dup_map(gm->map.map_raw, gm->map.size.y), EAST);
+	// else if (gm->ply.e_dir == SOUTH)
+	// 	rotate_right(gm, ray_dup_map(gm->map.map_raw, gm->map.size.y), SOUTH);
+	(void)gm;
 }
