@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 07:02:26 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 07:24:18 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define PLY_ROTSPD	0.0625
 # define PLY_NEGCOL	0.5
 # define PLY_POSCOL	0.25
-# define PLY_PLANE	0.9
+# define PLY_PLANE	1
 
 /* Self defined */
 # define RED		0xFF0000

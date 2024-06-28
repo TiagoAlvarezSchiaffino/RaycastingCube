@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:36:05 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 07:31:57 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,10 @@ int	ray_display(t_gm *gm)
 	mlx_clear_window(gm->mlx, gm->win.ref);
 	if (gm->win.mouse == 0)
 		ray_mouse_control(gm);
+	print_da(gm->map.map);
 	ray_render(gm);
+	printf("Ply plane x: %f\n", gm->ply.plane.x);
+	printf("Ply plane y: %f\n", gm->ply.plane.y);
 	ray_display_minimap(gm);
 	return (0);
 }
