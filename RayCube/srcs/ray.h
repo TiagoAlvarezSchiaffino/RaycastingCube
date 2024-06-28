@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 06:19:27 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:34:42 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,6 @@ typedef struct s_map
 	t_img	*mini;
 	t_list	*door;
 	char	**map;
-	char	**map_raw;
 	t_ivct	size;
 	t_img	imgw;
 }	t_map;
@@ -270,7 +269,6 @@ void	ray_display_minimap(t_gm *gm);
 void	ray_color_block(t_gm *gm, t_ivct cur, unsigned int color);
 void	ray_copy_pixel(t_gm *gm, int src_pixel, int x, int y);
 void	ray_color_image(t_gm *gm, t_img *img, int color);
-char	**ray_dup_map(char **map, int height);
 
 void	ray_player_vertical_movement(t_gm *gm, int keycode);
 void	ray_player_horizontal_movement(t_gm *gm, int keycode);
