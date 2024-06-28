@@ -8,48 +8,56 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:12:50 by Tiago                     /   (_____/    */
-/*   Updated: 2024/06/28 05:27:21 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:50:08 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
+static void	create_new_image(t_gm *gm, int type)
+{
+	if (type == 1)
+	{
+		gm->map.main->ref = mlx_new_image(gm->mlx, gm->map.size.x * MMAP_PX,
+				gm->map.size.y * MMAP_PX);
+		gm->map.main->addr = mlx_get_data_addr(gm->map.main->ref,
+				&gm->map.main->bpp, &gm->map.main->sl, &gm->map.main->end);
+	}
+	else if (type == 2)
+	{
+		if (gm->map.mini->ref != NULL)
+			mlx_destroy_image(gm->mlx, gm->map.mini->ref);
+		gm->map.mini->ref = mlx_new_image(gm->mlx,
+				MMAP_W * MMAP_PX, MMAP_W * MMAP_PX);
+		gm->map.mini->addr = mlx_get_data_addr(gm->map.mini->ref,
+				&gm->map.mini->bpp, &gm->map.mini->sl, &gm->map.mini->end);
+	}
+}
+
 static void	create_map(t_gm *gm)
 {
 	t_ivct	cur;
 
-	gm->map.main->ref = mlx_new_image(gm->mlx, gm->map.size.x * MMAP_PX,
-			gm->map.size.y * MMAP_PX);
-	gm->map.main->addr = mlx_get_data_addr(gm->map.main->ref,
-			&gm->map.main->bpp, &gm->map.main->sl, &gm->map.main->end);
-	cur.y = -1;
-	while (++cur.y < gm->map.size.y)
+	if (gm->map.main->ref == NULL)
 	{
-		cur.x = -1;
-		while (++cur.x < gm->map.size.x)
+		create_new_image(gm, 1);
+		cur.y = -1;
+		while (++cur.y < gm->map.size.y)
 		{
-			if (gm->map.map[cur.y][cur.x] == '1')
-				ray_color_block(gm, cur, TWHITE);
-			else if (gm->map.map[cur.y][cur.x] == ' ')
-				ray_color_block(gm, cur, TBLACK);
-			else if (gm->map.map[cur.y][cur.x] == 'D')
-				ray_color_block(gm, cur, TBROWN);
-			else
-				ray_color_block(gm, cur, TGREY);
+			cur.x = -1;
+			while (++cur.x < gm->map.size.x)
+			{
+				if (gm->map.map[cur.y][cur.x] == '1')
+					ray_color_block(gm, cur, TWHITE);
+				else if (gm->map.map[cur.y][cur.x] == ' ')
+					ray_color_block(gm, cur, TBLACK);
+				else if (gm->map.map[cur.y][cur.x] == 'D')
+					ray_color_block(gm, cur, TBROWN);
+				else
+					ray_color_block(gm, cur, TGREY);
+			}
 		}
 	}
-}
-
-static void	copy_pixel(t_gm *gm, int src_pixel, int x, int y)
-{
-	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 0]
-		= gm->map.main->addr[src_pixel + 0];
-	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 1]
-		= gm->map.main->addr[src_pixel + 1];
-	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 2]
-		= gm->map.main->addr[src_pixel + 2];
-	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 3]
-		= gm->map.main->addr[src_pixel + 3];
 }
 
 static void	create_minimap(t_gm *gm)
@@ -58,10 +66,7 @@ static void	create_minimap(t_gm *gm)
 	t_ivct	max;
 	t_ivct	min;
 
-	gm->map.mini->ref = mlx_new_image(gm->mlx,
-			MMAP_W * MMAP_PX, MMAP_W * MMAP_PX);
-	gm->map.mini->addr = mlx_get_data_addr(gm->map.mini->ref,
-			&gm->map.mini->bpp, &gm->map.mini->sl, &gm->map.mini->end);
+	create_new_image(gm, 2);
 	min.y = (gm->ply.pos.y * MMAP_PX) - (MMAP_PX * (MMAP_H / 2)) - 1;
 	max.y = (gm->ply.pos.y * MMAP_PX) + (MMAP_PX * ((MMAP_H / 2) + 1));
 	min.x = (gm->ply.pos.x * MMAP_PX) - (MMAP_PX * (MMAP_W / 2)) - 1;
@@ -75,7 +80,7 @@ static void	create_minimap(t_gm *gm)
 			if (cur.x >= 0 && cur.y >= 0
 				&& cur.x <= (gm->map.size.x * MMAP_PX) - 1
 				&& cur.y <= (gm->map.size.y * MMAP_PX) - 1)
-				copy_pixel(gm, (cur.y * gm->map.main->sl) + (cur.x * 4),
+				ray_copy_pixel(gm, (cur.y * gm->map.main->sl) + (cur.x * 4),
 					cur.x - min.x - 1, cur.y - min.y - 1);
 		}
 	}
@@ -100,8 +105,10 @@ static void	draw_player(t_gm *gm)
 
 void	ray_display_minimap(t_gm *gm)
 {
+	mlx_clear_window(gm->mlx, gm->win.ref);
 	create_map(gm);
 	create_minimap(gm);
-	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.mini->ref, 0, 0);
 	draw_player(gm);
+	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.mini->ref, 0, 0);
+	return ;
 }
