@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 05:28:11 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:37:03 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	init_map(t_gm *gm)
 	gm->map.mini = ft_calloc(1, sizeof(t_img));
 	gm->map.imgw.ref = mlx_new_image(gm->mlx, WIN_W, WIN_H);
 	gm->map.imgw.addr = mlx_get_data_addr(gm->map.imgw.ref, &gm->map.imgw.bpp,
-		&gm->map.imgw.sl, &gm->map.imgw.end);
+			&gm->map.imgw.sl, &gm->map.imgw.end);
+	gm->map.map_in = NULL;
 }
 
 static void	init_ply(t_gm *gm)

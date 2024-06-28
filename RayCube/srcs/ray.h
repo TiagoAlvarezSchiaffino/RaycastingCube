@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 05:13:05 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:40:39 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,24 @@ typedef struct s_ply
 	t_dvct	plane;
 }	t_ply;
 
+typedef struct s_render
+{
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+}	t_render;
+
 /**
  * @brief Gamemaster struct
  *
@@ -215,10 +233,11 @@ typedef struct s_ply
  */
 typedef struct s_gm
 {
-	void	*mlx;
-	t_win	win;
-	t_map	map;
-	t_ply	ply;
+	void		*mlx;
+	t_win		win;
+	t_map		map;
+	t_ply		ply;
+	t_render	render;
 }	t_gm;
 
 void	ray_init_gm(t_gm *gm);
