@@ -8,19 +8,18 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:25:06 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:29:44 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 06:00:24 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-// Still a bit buggy so can't use yet
-int	collision(t_gm *gm, t_dvct pos)
+static int	collision(t_gm *gm, t_dvct pos, double pad)
 {
 	t_ivct	map_pos;
 
-	map_pos.x = (int)(pos.x);
-	map_pos.y = (int)(pos.y);
+	map_pos.x = (int)(pos.x + pad);
+	map_pos.y = (int)(pos.y + pad);
 	if (map_pos.x >= 0 && map_pos.x < gm->map.size.x
 		&& map_pos.y >= 0 && map_pos.y < gm->map.size.y)
 	{
@@ -32,31 +31,54 @@ int	collision(t_gm *gm, t_dvct pos)
 
 void	ray_player_vertical_movement(t_gm *gm, int keycode)
 {
-	if (keycode == KEY_W)
+	t_dvct	new;
+
+	if (keycode == KEY_D)
 	{
-		gm->ply.pos.x = gm->ply.pos.x + (gm->ply.dir.x * (PLY_MVSPD));
-		gm->ply.pos.y = gm->ply.pos.y + (gm->ply.dir.y * (PLY_MVSPD));
+		new.x = gm->ply.pos.x + (gm->ply.dir.x * (PLY_MVSPD));
+		new.y = gm->ply.pos.y + (gm->ply.dir.y * (PLY_MVSPD));
+		if (collision(gm, new, PLY_NEGCOL) == 0)
+		{
+			gm->ply.pos.x = new.x;
+			gm->ply.pos.y = new.y;
+		}
 	}
-	else if (keycode == KEY_S)
+	else if (keycode == KEY_A)
 	{
-		gm->ply.pos.x = gm->ply.pos.x - (gm->ply.dir.x * (PLY_MVSPD));
-		gm->ply.pos.y = gm->ply.pos.y - (gm->ply.dir.y * (PLY_MVSPD));
+		new.x = gm->ply.pos.x - (gm->ply.dir.x * (PLY_MVSPD));
+		new.y = gm->ply.pos.y - (gm->ply.dir.y * (PLY_MVSPD));
+		if (collision(gm, new, PLY_POSCOL) == 0)
+		{
+			gm->ply.pos.x = new.x;
+			gm->ply.pos.y = new.y;
+		}
 	}
 }
 
 void	ray_player_horizontal_movement(t_gm *gm, int keycode)
 {
 	double	rad;
+	t_dvct	new;
 
 	rad = RAD_90DEG;
-	if (keycode == KEY_D)
+	if (keycode == KEY_W)
 		rad = -RAD_90DEG;
-	if (keycode == KEY_A || keycode == KEY_D)
+	if (keycode == KEY_S || keycode == KEY_W)
 	{
-		gm->ply.pos.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)
+		new.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)
 				- gm->ply.dir.y * sin(rad) * (PLY_MVSPD));
-		gm->ply.pos.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
+		new.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
 				+ gm->ply.dir.x * sin(rad) * (PLY_MVSPD));
+		if (keycode == KEY_W && collision(gm, new, PLY_POSCOL) == 0)
+		{
+			gm->ply.pos.x = new.x;
+			gm->ply.pos.y = new.y;
+		}
+		else if (keycode == KEY_S && collision(gm, new, PLY_NEGCOL) == 0)
+		{
+			gm->ply.pos.x = new.x;
+			gm->ply.pos.y = new.y;
+		}
 	}
 }
 
