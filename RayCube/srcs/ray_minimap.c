@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:12:50 by Tiago                     /   (_____/    */
-/*   Updated: 2024/06/28 06:00:27 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 07:20:16 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	create_new_image(t_gm *gm, int type)
 {
-	if (type == 1)
+	if (type == 1 && gm->map.main->ref == NULL)
 	{
 		gm->map.main->ref = mlx_new_image(gm->mlx, gm->map.size.x * MMAP_PX,
 				gm->map.size.y * MMAP_PX);
@@ -28,7 +28,7 @@ static void	create_new_image(t_gm *gm, int type)
 		if (gm->map.mini->ref != NULL)
 			mlx_destroy_image(gm->mlx, gm->map.mini->ref);
 		gm->map.mini->ref = mlx_new_image(gm->mlx,
-				MMAP_W * MMAP_PX, MMAP_W * MMAP_PX);
+				MMAP_W * MMAP_PX, MMAP_H * MMAP_PX);
 		gm->map.mini->addr = mlx_get_data_addr(gm->map.mini->ref,
 				&gm->map.mini->bpp, &gm->map.mini->sl, &gm->map.mini->end);
 	}
@@ -49,10 +49,10 @@ static void	create_map(t_gm *gm)
 			{
 				if (gm->map.map[cur.y][cur.x] == '1')
 					ray_color_block(gm, cur, TWHITE);
-				else if (gm->map.map[cur.y][cur.x] == ' ')
-					ray_color_block(gm, cur, TBLACK);
 				else if (gm->map.map[cur.y][cur.x] == 'D')
 					ray_color_block(gm, cur, TBROWN);
+				else if (gm->map.map[cur.y][cur.x] == ' ')
+					ray_color_block(gm, cur, TRANS);
 				else
 					ray_color_block(gm, cur, TGREY);
 			}
@@ -67,6 +67,7 @@ static void	create_minimap(t_gm *gm)
 	t_ivct	min;
 
 	create_new_image(gm, 2);
+	ray_color_image(gm, gm->map.mini, TRANS);
 	min.y = (gm->ply.pos.y * MMAP_PX) - (MMAP_PX * (MMAP_H / 2)) - 1;
 	max.y = (gm->ply.pos.y * MMAP_PX) + (MMAP_PX * ((MMAP_H / 2) + 1));
 	min.x = (gm->ply.pos.x * MMAP_PX) - (MMAP_PX * (MMAP_W / 2)) - 1;

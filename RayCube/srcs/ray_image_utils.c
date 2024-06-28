@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:22:28 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/23 07:38:12 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 07:13:44 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,44 @@ static void	change_color(t_gm *gm, unsigned int color, int pixel, char *addr)
 	}
 }
 
-void	ray_draw_block(t_gm *gm, int x, int y, unsigned int color)
+void	ray_color_block(t_gm *gm, t_ivct cur, unsigned int color)
 {
-	int	px;
-	int	py;
+	t_dvct	px;
 
-	py = -1;
-	while (++py < MMAP_PX)
+	px.y = -1;
+	while (++px.y < MMAP_PX)
 	{
-		px = -1;
-		while (++px < MMAP_PX)
+		px.x = -1;
+		while (++px.x < MMAP_PX)
 		{
-			change_color(gm, color, (((y * MMAP_PX) + py) * gm->map.main->sl)
-				+ (((x * MMAP_PX) + px) * 4), gm->map.main->addr);
+			change_color(gm, color,
+				(((cur.y * MMAP_PX) + px.y) * gm->map.main->sl)
+				+ (((cur.x * MMAP_PX) + px.x) * 4), gm->map.main->addr);
 		}
 	}
 }
 
-// void	ray_copy_image(t_img *dst, t_img *src, int x, int y)
-// {
+void	ray_copy_pixel(t_gm *gm, int src_pixel, int x, int y)
+{
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 0]
+		= gm->map.main->addr[src_pixel + 0];
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 1]
+		= gm->map.main->addr[src_pixel + 1];
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 2]
+		= gm->map.main->addr[src_pixel + 2];
+	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 3]
+		= gm->map.main->addr[src_pixel + 3];
+}
 
-// }
+void	ray_color_image(t_gm *gm, t_img *img, int color)
+{
+	t_ivct	pos;
+
+	pos.y = -1;
+	while (++pos.y < MMAP_H * MMAP_PX)
+	{
+		pos.x = -1;
+		while (++pos.x < MMAP_W * MMAP_PX)
+			change_color(gm, color, (pos.y * img->sl) + (pos.x * 4), img->addr);
+	}
+}

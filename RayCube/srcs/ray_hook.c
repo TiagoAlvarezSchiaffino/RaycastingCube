@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:07:50 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 05:46:14 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 07:10:32 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	ray_user_input(int keycode, t_gm *gm)
 	ray_player_horizontal_movement(gm, keycode);
 	ray_player_view(gm, keycode);
 	ray_mouse_state(gm, keycode);
-	ray_display(gm);
 	return (0);
 }
 
