@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 05:27:12 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:33:10 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,22 @@ static void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-// static void	draw_verline(t_gm *gm, int i, int draw_start, int draw_end, int color)
-// {
-// 	while (draw_start < draw_end)
-// 	{
-// 		mlx_pixel_put(gm->mlx, gm->win.ref, i, draw_start, color);
-// 		draw_start++;
-// 	}
-// }
-
-static void	draw_verline2(t_img *img, int i, int draw_start, int draw_end, int color, t_gm *gm)
+static void	draw_verline(t_img *img, int i, int draw_start, int draw_end, int colorofx, t_gm *gm)
 {
 	char	*dest;
-	int		y;
+	double		y;
 	int		newcolor;
+	double	factor;
 
 	y = 0;
+		factor = ((double)(img->size.y - 1) / (double)(draw_end - draw_start));
 	while (draw_start < draw_end)
 	{
-		dest = img->addr + (y * img->sl + color * (img->bpp / 8));
+		dest = img->addr + ((int)y * img->sl + colorofx * (img->bpp / 8));
 		newcolor = *(unsigned int *)dest;
 		my_mlx_pixel_put(&gm->map.imgw, i, draw_start, newcolor);
 		draw_start++;
-		y++;
-		if (y >= img->size.y - 1)
-			 y = 0;
+		y = y + factor;
 	}
 }
 
@@ -54,7 +45,6 @@ void	ray_render(t_gm *gm)
 {
 	t_img	*curimg;
 	int	x;
-	int	i = 0;
 
 	x = -1;
 	while (++x < WIN_W)
@@ -135,15 +125,6 @@ void	ray_render(t_gm *gm)
 			draw_end = WIN_H - 1;
 
 		// CODE HERE IS FOR PIXEL TEXTURE
-		int color = GREEN;
-		switch(gm->map.map[map_y][map_x])
-		{
-			case 1:  color = RED;  break; //red
-			case 2:  color = GREEN;  break; //green
-			case 3:  color = BLUE;   break; //blue
-			case 4:  color = TWHITE;  break; //white
-			default: color = TBROWN; break; //yellow
-		}
 		if (side == 0)
 		{
 			if (step_x == 1)
@@ -158,20 +139,54 @@ void	ray_render(t_gm *gm)
 			else
 				curimg = &gm->map.e_img;
 		}
-		draw_verline2(curimg, x, draw_start, draw_end, i, gm);
-		i++;
-		if (i >= gm->map.n_img.size.x - 1)
-			i = 0;
+		//calculate value of wallX
+		double wallX; //where exactly the wall was hit
+		if (side == 0) wallX = gm->ply.pos.y + perp_wall_dist * rayDirY;
+		else           wallX = gm->ply.pos.x + perp_wall_dist * rayDirX;
+		wallX -= floor((wallX));
+
+		//x coordinate on the texture
+		int texX = (int)(wallX * (double)(curimg->size.x));
+		if(side == 0)
+		{
+			if (rayDirX > 0)
+				texX = curimg->size.x - (curimg->size.x - texX - 1);
+			else
+				texX = curimg->size.x - texX - 1;
+		}
+		if(side == 1) 
+		{
+			if (rayDirY < 0)
+				texX = curimg->size.x - (curimg->size.x - texX - 1);
+			else
+				texX = curimg->size.x - texX - 1;
+		}
+		draw_verline(curimg, x, draw_start, draw_end, texX, gm);
 	}
 	mlx_put_image_to_window(gm->mlx, gm->win.ref, gm->map.imgw.ref, 0, 0);
 }
 
 int	ray_display(t_gm *gm)
 {
+	int	i;
+	int	k;
+
+	i = 0;
+	//Sets img window to black so can turn around
+	while (i < WIN_W)
+	{
+		k = 0;
+		while (k < WIN_H)
+		{
+			my_mlx_pixel_put(&gm->map.imgw, i, k, TBLACK);
+			k++;
+		}
+		i++;
+	}
 	mlx_clear_window(gm->mlx, gm->win.ref);
 	if (gm->win.mouse == 0)
 		ray_mouse_control(gm);
 	ray_render(gm);
-	ray_display_minimap(gm);
+	// ray_display_minimap(gm); USES A LOT OF MEMORY AND KEEPS INCERASING
 	return (0);
 }

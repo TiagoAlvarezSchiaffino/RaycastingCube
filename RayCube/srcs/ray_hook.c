@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:07:50 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:18:02 by Tiago                  /_____/ U         */
+/*   Updated: 2024/06/28 05:28:56 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ void	ray_hooks(t_gm *gm)
 	mlx_hook(gm->win.ref, EXIT_EVENT, EXIT_MASK, &ray_success_exit, NULL);
 	mlx_hook(gm->win.ref, KD_EVENT, KEY_PRESS, &ray_user_input, gm);
 	mlx_loop_hook(gm->mlx, &ray_display, gm);
-	ray_display(gm);
 	mlx_loop(gm->mlx);
 }
