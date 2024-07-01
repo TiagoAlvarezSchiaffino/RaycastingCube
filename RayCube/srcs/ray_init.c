@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 07:04:03 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:23:51 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	init_map(t_gm *gm)
 	gm->map.e_img.ref = NULL;
 	gm->map.s_img.ref = NULL;
 	gm->map.w_img.ref = NULL;
-	gm->map.d_img.ref = NULL;
 	gm->map.door = NULL;
 	gm->map.map = NULL;
 	gm->map.c_rgb.hex = -1;
@@ -44,9 +43,27 @@ static void	init_map(t_gm *gm)
 static void	init_ply(t_gm *gm)
 {
 	gm->ply.e_dir = NOTSET;
-	// Below not needed anymore since initalized at check_map.c
 	gm->ply.plane.x = 0;
 	gm->ply.plane.y = 0;
+}
+
+static void	init_door(t_gm *gm)
+{
+	int		i;
+	char	*path;
+	char	*suffix;
+
+	i = -1;
+	while (++i < 16)
+	{
+		path = ft_strdup("sprites/door/door");
+		suffix = ft_strjoin_free(ft_itoa(i + 1), ".xpm");
+		path = ft_strjoin_free(path, suffix);
+		free(suffix);
+		gm->map.d_img[i].ref = mlx_xpm_file_to_image(gm->mlx, path,
+				&gm->map.d_img[i].size.x, &gm->map.d_img[i].size.y);
+		free(path);
+	}
 }
 
 void	ray_init_gm(t_gm *gm)
@@ -54,4 +71,5 @@ void	ray_init_gm(t_gm *gm)
 	init_mlx(gm);
 	init_map(gm);
 	init_ply(gm);
+	init_door(gm);
 }

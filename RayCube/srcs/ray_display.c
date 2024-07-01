@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:10:34 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:20:35 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,17 @@ void	ray_render(t_gm *gm)
 	while (++x < WIN_W)
 	{
 		gm->render.camera_x = 2 * x / (double)WIN_W - 1;
+		// gm->render.camera_x += 0.5;
 		gm->render.raydir_x = gm->ply.dir.x + gm->ply.plane.x * gm->render.camera_x;
 		gm->render.raydir_y = gm->ply.dir.y + gm->ply.plane.y * gm->render.camera_x;
 
-		gm->render.map_x = (int)gm->ply.pos.x;
-		gm->render.map_y = (int)gm->ply.pos.y;
+		// gm->render.raydir_x += 0.5;
+		// gm->render.raydir_y += 0.5;
+
+		double offsetx = gm->ply.pos.x + 0.5;
+		double offsety = gm->ply.pos.y + 0.5;
+		gm->render.map_x = (int)offsetx;
+		gm->render.map_y = (int)offsety;
 
 		gm->render.delta_dist_x = (gm->render.raydir_x == 0) ? 1e30 : fabs(1 / gm->render.raydir_x);
 		gm->render.delta_dist_y = (gm->render.raydir_y == 0) ? 1e30 : fabs(1 / gm->render.raydir_y);
@@ -64,22 +70,22 @@ void	ray_render(t_gm *gm)
 		if (gm->render.raydir_x < 0)
 		{
 			gm->render.step_x = -1;
-			gm->render.side_dist_x = (gm->ply.pos.x - gm->render.map_x) * gm->render.delta_dist_x;
+			gm->render.side_dist_x = (offsetx - gm->render.map_x) * gm->render.delta_dist_x;
 		}
 		else
 		{
 			gm->render.step_x = 1;
-			gm->render.side_dist_x = (gm->render.map_x + 1.0 - gm->ply.pos.x) * gm->render.delta_dist_x;
+			gm->render.side_dist_x = (gm->render.map_x + 1.0 - offsetx) * gm->render.delta_dist_x;
 		}
 		if (gm->render.raydir_y < 0)
 		{
 			gm->render.step_y = -1;
-			gm->render.side_dist_y = (gm->ply.pos.y - gm->render.map_y) * gm->render.delta_dist_y;
+			gm->render.side_dist_y = (offsety - gm->render.map_y) * gm->render.delta_dist_y;
 		}
 		else
 		{
 			gm->render.step_y = 1;
-			gm->render.side_dist_y = (gm->render.map_y + 1.0 - gm->ply.pos.y) * gm->render.delta_dist_y;
+			gm->render.side_dist_y = (gm->render.map_y + 1.0 - offsety) * gm->render.delta_dist_y;
 		}
 
 		while (gm->render.hit == 0)
@@ -132,8 +138,8 @@ void	ray_render(t_gm *gm)
 		}
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit
-		if (gm->render.side == 0) wallX = gm->ply.pos.y + gm->render.perp_wall_dist * gm->render.raydir_y;
-		else           wallX = gm->ply.pos.x + gm->render.perp_wall_dist * gm->render.raydir_x;
+		if (gm->render.side == 0) wallX = offsety + gm->render.perp_wall_dist * gm->render.raydir_y;
+		else           wallX = offsetx + gm->render.perp_wall_dist * gm->render.raydir_x;
 		wallX -= floor((wallX));
 
 		//x coordinate on the texture
@@ -185,10 +191,7 @@ int	ray_display(t_gm *gm)
 	mlx_clear_window(gm->mlx, gm->win.ref);
 	if (gm->win.mouse == 0)
 		ray_mouse_control(gm);
-	print_da(gm->map.map);
 	ray_render(gm);
-	printf("Ply plane x: %f\n", gm->ply.plane.x);
-	printf("Ply plane y: %f\n", gm->ply.plane.y);
 	ray_display_minimap(gm);
 	return (0);
 }

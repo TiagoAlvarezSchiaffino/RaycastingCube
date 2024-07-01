@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 07:24:18 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:14:29 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@
 
 /* Player prefs */
 # define PLY_MVSPD	0.25
-# define PLY_ROTSPD	0.0625
-# define PLY_NEGCOL	0.5
-# define PLY_POSCOL	0.25
+# define PLY_ROTSPD	0.05
 # define PLY_PLANE	1
 
 /* Self defined */
@@ -174,7 +172,7 @@ typedef struct s_map
 	t_img	e_img;
 	t_img	s_img;
 	t_img	w_img;
-	t_img	d_img;
+	t_img	d_img[16];
 	t_img	*main;
 	t_img	*mini;
 	t_list	*door;
