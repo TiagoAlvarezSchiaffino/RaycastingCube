@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/07/01 08:33:49 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:08:42 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:41:35 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,36 @@ static void	fade_door(t_gm *gm)
 	}
 }
 
+static void	change_char(t_gm *gm, char from, char to)
+{
+	t_ivct	pos;
+
+	pos.y = -1;
+	while (++pos.y < gm->map.size.y)
+	{
+		pos.x = -1;
+		while (++pos.x < gm->map.size.x)
+		{
+			if (gm->map.map[pos.y][pos.x] == from)
+				gm->map.map[pos.y][pos.x] = to;
+		}
+	}
+}
+
 void	ray_update_door(t_gm *gm)
 {
 	static int	playback = 1;
 
 	if (gm->win.playing == 0)
 		return ;
+	if (gm->map.door_state == D_OPEN)
+		change_char(gm, 'X', 'D');
 	gm->win.frame += playback;
 	fade_door(gm);
 	if (gm->win.frame >= DOOR_SPD || gm->win.frame <= 0)
 	{
+		if (gm->map.door_state == D_CLOSE)
+			change_char(gm, 'D', 'X');
 		gm->win.playing = 0;
 		playback *= -1;
 	}
