@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/07/01 08:33:49 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:49:11 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:08:42 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ray_update_door(t_gm *gm)
 		gm->win.playing = 0;
 		playback *= -1;
 	}
+	gm->map.door_state = gm->map.door_state == D_OPEN;
 }
 
 void	ray_door_state(t_gm *gm, int keycode)

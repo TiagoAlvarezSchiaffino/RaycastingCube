@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:00:35 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:08:10 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	renderdoor(t_gm *gm)
 				gm->render.side = 1;
 			}
 
-			if ((gm->map.map[(int)gm->render.map_y][(int)gm->render.map_x] == 'D' && gm->map.door_state == 1) ||
+			if ((gm->map.map[(int)gm->render.map_y][(int)gm->render.map_x] == 'D') ||
 				gm->map.map[(int)gm->render.map_y][(int)gm->render.map_x] == '1')
 			{
 				gm->render.hit = 1;

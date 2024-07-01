@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:42:55 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:04:17 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 # define TWHITE		0x80FFFFFF
 # define TBLACK		0x80000000
 # define TRANS		0xFF000000
+# define D_OPEN		0
+# define D_CLOSE	1
 
 /**
  * @brief Double vector struct
