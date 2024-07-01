@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:25:06 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:11:15 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 10:43:52 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,53 +32,63 @@ static int	collision(t_gm *gm, t_dvct pos)
 	return (0);
 }
 
-void	ray_player_vertical_movement(t_gm *gm, int keycode)
+static int	check_each_step(t_gm *gm, int ver, double rad, int res)
 {
 	t_dvct	check;
+	double	step;
 
-	if (keycode == KEY_W)
+	step = 0.01;
+	if (ver)
 	{
-		check.x = gm->ply.pos.x + (gm->ply.dir.x * PLY_MVSPD * 2);
-		check.y = gm->ply.pos.y + (gm->ply.dir.y * PLY_MVSPD * 2);
-		if (collision(gm, check) == 0)
+		while (step < PLY_MVSPD)
 		{
-			gm->ply.pos.x = gm->ply.pos.x + (gm->ply.dir.x * PLY_MVSPD);
-			gm->ply.pos.y = gm->ply.pos.y + (gm->ply.dir.y * PLY_MVSPD);
+			check.x = gm->ply.pos.x + (gm->ply.dir.x * step * 2);
+			check.y = gm->ply.pos.y + (gm->ply.dir.y * step * 2);
+			res += collision(gm, check);
+			step += 0.01;
 		}
+		return (res);
 	}
-	else if (keycode == KEY_S)
+	while (step < PLY_MVSPD)
 	{
-		check.x = gm->ply.pos.x - (gm->ply.dir.x * PLY_MVSPD * 2);
-		check.y = gm->ply.pos.y - (gm->ply.dir.y * PLY_MVSPD * 2);
-		if (collision(gm, check) == 0)
-		{
-			gm->ply.pos.x = gm->ply.pos.x - (gm->ply.dir.x * PLY_MVSPD);
-			gm->ply.pos.y = gm->ply.pos.y - (gm->ply.dir.y * PLY_MVSPD);
-		}
+		check.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)
+				- gm->ply.dir.y * sin(rad) * (step * 2));
+		check.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
+				+ gm->ply.dir.x * sin(rad) * (step * 2));
+		res += collision(gm, check);
+		step += 0.01;
+	}
+	return (res);
+}
+
+void	ray_player_vertical_movement(t_gm *gm, int keycode)
+{
+	if (keycode == KEY_W && check_each_step(gm, 1, 0, 0) == 0)
+	{
+		gm->ply.pos.x = gm->ply.pos.x + (gm->ply.dir.x * PLY_MVSPD);
+		gm->ply.pos.y = gm->ply.pos.y + (gm->ply.dir.y * PLY_MVSPD);
+	}
+	else if (keycode == KEY_S && check_each_step(gm, 1, 0, 0) == 0)
+	{
+		gm->ply.pos.x = gm->ply.pos.x - (gm->ply.dir.x * PLY_MVSPD);
+		gm->ply.pos.y = gm->ply.pos.y - (gm->ply.dir.y * PLY_MVSPD);
 	}
 }
 
 void	ray_player_horizontal_movement(t_gm *gm, int keycode)
 {
 	double	rad;
-	t_dvct	check;
 
 	rad = M_PI / 2;
 	if (keycode == KEY_A)
 		rad = -M_PI / 2;
-	if (keycode == KEY_A || keycode == KEY_D)
+	if ((keycode == KEY_A || keycode == KEY_D)
+		&& check_each_step(gm, 0, rad, 0) == 0)
 	{
-		check.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)
-				- gm->ply.dir.y * sin(rad) * (PLY_MVSPD * 2));
-		check.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
-				+ gm->ply.dir.x * sin(rad) * (PLY_MVSPD * 2));
-		if (collision(gm, check) == 0)
-		{
-			gm->ply.pos.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)
-					- gm->ply.dir.y * sin(rad) * (PLY_MVSPD));
-			gm->ply.pos.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
-					+ gm->ply.dir.x * sin(rad) * (PLY_MVSPD));
-		}
+		gm->ply.pos.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)
+				- gm->ply.dir.y * sin(rad) * (PLY_MVSPD));
+		gm->ply.pos.y = gm->ply.pos.y + (gm->ply.dir.y * cos(rad)
+				+ gm->ply.dir.x * sin(rad) * (PLY_MVSPD));
 	}
 }
 
