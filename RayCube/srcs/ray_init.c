@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:23:51 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:40:10 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	init_mlx(t_gm *gm)
 	gm->mlx = mlx_init();
 	gm->win.ref = mlx_new_window(gm->mlx, WIN_W, WIN_H, "cub3D");
 	gm->win.frame = 0;
+	gm->win.playing = 0;
 	gm->win.mouse = 1;
 	mlx_mouse_move(gm->win.ref, WIN_W / 2, WIN_H / 2);
 }
@@ -29,7 +30,9 @@ static void	init_map(t_gm *gm)
 	gm->map.e_img.ref = NULL;
 	gm->map.s_img.ref = NULL;
 	gm->map.w_img.ref = NULL;
+	gm->map.d_img.ref = NULL;
 	gm->map.door = NULL;
+	gm->map.door_state = 0;
 	gm->map.map = NULL;
 	gm->map.c_rgb.hex = -1;
 	gm->map.f_rgb.hex = -1;
@@ -47,29 +50,9 @@ static void	init_ply(t_gm *gm)
 	gm->ply.plane.y = 0;
 }
 
-static void	init_door(t_gm *gm)
-{
-	int		i;
-	char	*path;
-	char	*suffix;
-
-	i = -1;
-	while (++i < 16)
-	{
-		path = ft_strdup("sprites/door/door");
-		suffix = ft_strjoin_free(ft_itoa(i + 1), ".xpm");
-		path = ft_strjoin_free(path, suffix);
-		free(suffix);
-		gm->map.d_img[i].ref = mlx_xpm_file_to_image(gm->mlx, path,
-				&gm->map.d_img[i].size.x, &gm->map.d_img[i].size.y);
-		free(path);
-	}
-}
-
 void	ray_init_gm(t_gm *gm)
 {
 	init_mlx(gm);
 	init_map(gm);
 	init_ply(gm);
-	init_door(gm);
 }

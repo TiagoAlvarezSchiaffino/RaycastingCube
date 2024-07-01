@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:12:50 by Tiago                     /   (_____/    */
-/*   Updated: 2024/06/28 07:20:16 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:29:06 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	create_minimap(t_gm *gm)
 			if (cur.x >= 0 && cur.y >= 0
 				&& cur.x <= (gm->map.size.x * MMAP_PX) - 1
 				&& cur.y <= (gm->map.size.y * MMAP_PX) - 1)
-				ray_copy_pixel(gm, (cur.y * gm->map.main->sl) + (cur.x * 4),
+				ray_copy_main(gm, (cur.y * gm->map.main->sl) + (cur.x * 4),
 					cur.x - min.x - 1, cur.y - min.y - 1);
 		}
 	}

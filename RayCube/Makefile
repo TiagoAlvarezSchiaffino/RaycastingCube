@@ -8,22 +8,22 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/06/28 06:37:19 by Tiago                 /_____/ U          #
+#   Updated: 2024/07/01 08:29:18 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
 NAME		=	raycube
-LIBFT		=	libft/libft.a
 MLX			=	mlx/libmlx.a
 CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
-CFLAGS		+=	-fsanitize=address -g3
+CFLAGS		=	-fsanitize=address -g3
 MLXFLAGS	=	-L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 SRCS_FILES	=	ray_main \
 				ray_hook \
 				ray_exit \
 				ray_init \
+				ray_door \
 				ray_mouse \
 				ray_display \
 				ray_get_map \

@@ -8,12 +8,13 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:22:28 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 07:13:44 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:38:22 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
+/* End == 0 : BGRA */
 static void	change_color(t_gm *gm, unsigned int color, int pixel, char *addr)
 {
 	if (gm->map.main->end == 1)
@@ -49,7 +50,7 @@ void	ray_color_block(t_gm *gm, t_ivct cur, unsigned int color)
 	}
 }
 
-void	ray_copy_pixel(t_gm *gm, int src_pixel, int x, int y)
+void	ray_copy_main(t_gm *gm, int src_pixel, int x, int y)
 {
 	gm->map.mini->addr[(y * gm->map.mini->sl) + (x * 4) + 0]
 		= gm->map.main->addr[src_pixel + 0];

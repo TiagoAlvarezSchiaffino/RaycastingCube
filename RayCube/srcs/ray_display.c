@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:20:35 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:33:37 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,6 @@ int	ray_display(t_gm *gm)
 		ray_mouse_control(gm);
 	ray_render(gm);
 	ray_display_minimap(gm);
+	ray_update_door(gm);
 	return (0);
 }
