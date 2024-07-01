@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:25:06 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:28:11 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:42:15 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static int	collision(t_gm *gm, t_dvct pos)
 		&& map_pos.y >= 0 && map_pos.y < gm->map.size.y)
 	{
 		if (gm->map.map[map_pos.y][map_pos.x] == '1')
+			return (1);
+		if (gm->map.map[map_pos.y][map_pos.x] == 'D'
+			&& gm->map.door_state)
 			return (1);
 	}
 	return (0);
