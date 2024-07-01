@@ -8,7 +8,7 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/07/01 09:43:26 by Tiago                 /_____/ U          #
+#   Updated: 2024/07/01 10:30:29 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME		=	raycube
 LIBFT		=	libft/libft.a
 MLX			=	mlx/libmlx.a
 CC			=	gcc
-RM			=	rm -f
+RM			=	rm -rf
+MKDIR		=	mkdir -p
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
 # CFLAGS		=	-fsanitize=address -g3
 MLXFLAGS	=	-L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
@@ -45,7 +46,7 @@ LIBFT_DIR	=	libft/
 OBJS_DIR	=	objs/
 
 all:			
-				mkdir -p $(OBJS_DIR)
+				$(MKDIR) $(OBJS_DIR)
 				make libft
 				make $(NAME)
 
@@ -59,12 +60,12 @@ libft:
 				make -C $(LIBFT_DIR)
 
 clean:
-				rm -rf $(OBJS_DIR)
+				$(RM) $(OBJS_DIR)
 				make clean -C $(LIBFT_DIR)
 
 fclean:			clean
 				make fclean -C $(LIBFT_DIR)
-				rm -rf $(NAME)
+				$(RM) $(NAME)
 
 re:				fclean all
 
