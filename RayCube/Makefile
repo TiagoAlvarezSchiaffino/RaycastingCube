@@ -8,35 +8,36 @@
 #                                                            (    @\___      #
 #                                                             /         O    #
 #   Created: 2024/06/14 08:21:03 by Tiago                    /   (_____/     #
-#   Updated: 2024/07/01 09:11:42 by Tiago                 /_____/ U          #
+#   Updated: 2024/07/01 09:43:26 by Tiago                 /_____/ U          #
 #                                                                            #
 # ************************************************************************** #
 
 NAME		=	raycube
+LIBFT		=	libft/libft.a
 MLX			=	mlx/libmlx.a
 CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -Imlx
-CFLAGS		=	-fsanitize=address -g3
+# CFLAGS		=	-fsanitize=address -g3
 MLXFLAGS	=	-L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 SRCS_FILES	=	ray_main \
 				ray_hook \
 				ray_exit \
 				ray_init \
 				ray_door \
+				ray_draw \
 				ray_mouse \
-				ray_display \
+				ray_render \
 				ray_get_map \
 				ray_minimap \
+				ray_display \
 				ray_check_map \
 				ray_check_file \
+				ray_renderdoor \
 				ray_image_utils \
 				ray_check_utils \
-				ray_player_control \
-				ray_render \
 				ray_render_utils \
-				ray_draw \
-				temp
+				ray_player_control
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/

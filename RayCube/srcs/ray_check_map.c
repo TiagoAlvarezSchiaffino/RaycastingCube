@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:49:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:07:13 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:46:54 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,6 @@ static void	get_ply_dir(t_gm *gm, int x, int y)
 	}
 }
 
-static void	get_door(t_gm *gm, int x, int y)
-{
-	t_ivct	vct;
-	t_list	*new;
-
-	if (gm->map.map[y][x] != 'D')
-		return ;
-	vct.x = x;
-	vct.y = y;
-	new = ft_lstnew(ft_calloc(1, sizeof(t_ivct)));
-	ft_memcpy(new->content, &vct, sizeof(t_ivct));
-	ft_lstadd_back(&gm->map.door, new);
-}
-
 void	ray_check_map(t_gm *gm, int x, int y)
 {
 	int	error;
@@ -87,7 +73,8 @@ void	ray_check_map(t_gm *gm, int x, int y)
 		|| gm->map.map[y][x] == 'W' || gm->map.map[y][x] == 'D')
 	{
 		get_ply_dir(gm, x, y);
-		get_door(gm, x, y);
+		if (gm->map.map[y][x] == 'D')
+			gm->map.door_state = D_CLOSE;
 		error += check_square(gm, x + 1, y);
 		error += check_square(gm, x - 1, y);
 		error += check_square(gm, x, y + 1);

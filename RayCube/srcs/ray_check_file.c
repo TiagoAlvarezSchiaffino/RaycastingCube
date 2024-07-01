@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:03:19 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:31:20 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:46:08 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	ray_check_file(t_gm *gm, int ac, char **av)
 		ray_check_map(gm, 0, 0);
 	if (gm->ply.e_dir == NOTSET)
 		ray_fail_exit("No player set in map", NULL);
-	if (gm->map.door != NULL && gm->map.d_img.ref == NULL)
+	if (gm->map.door_state == D_CLOSE && gm->map.d_img.ref == NULL)
 		ray_fail_exit("Door in use but no image path set for texture", NULL);
 }

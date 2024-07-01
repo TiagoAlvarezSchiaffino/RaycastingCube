@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:09:24 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:53:19 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void	init_map(t_gm *gm)
 	gm->map.s_img.ref = NULL;
 	gm->map.w_img.ref = NULL;
 	gm->map.d_img.ref = NULL;
-	gm->map.door = NULL;
-	gm->map.door_state = D_CLOSE;
+	gm->map.door_state = D_OPEN;
 	gm->map.map = NULL;
 	gm->map.c_rgb.hex = -1;
 	gm->map.f_rgb.hex = -1;
