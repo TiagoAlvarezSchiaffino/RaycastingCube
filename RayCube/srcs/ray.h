@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:04:17 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 09:15:58 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,8 @@ typedef struct s_render
 	double	camera_x;
 	double	raydir_x;
 	double	raydir_y;
+	double	offset_x;
+	double	offset_y;
 	int		map_x;
 	int		map_y;
 	double	side_dist_x;
@@ -226,6 +228,11 @@ typedef struct s_render
 	double	perp_wall_dist;
 	int		step_x;
 	int		step_y;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_x;
 	int		hit;
 	int		side;
 }	t_render;
@@ -287,5 +294,14 @@ void	ray_update_door(t_gm *gm);
 void	print_ll(t_list **list);
 void	print_da(char **array);
 void	print_dl(t_list **list);
+
+//Render functions
+void	ray_render(t_gm *gm);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	draw_verline(t_img *img, int i, t_gm *gm);
+void	set_variables(t_gm *gm, int x);
+void	check_steps(t_gm *gm);
+void	set_length(t_gm *gm);
+void	check_sides(t_gm *gm, t_img *curimg);
 
 #endif
