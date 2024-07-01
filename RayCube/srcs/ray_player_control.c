@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:25:06 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:42:15 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:42:37 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	ray_player_horizontal_movement(t_gm *gm, int keycode)
 	double	rad;
 	t_dvct	check;
 
-	rad = RAD_90DEG;
+	rad = M_PI / 2;
 	if (keycode == KEY_A)
-		rad = -RAD_90DEG;
+		rad = -M_PI / 2;
 	if (keycode == KEY_A || keycode == KEY_D)
 	{
 		check.x = gm->ply.pos.x + (gm->ply.dir.x * cos(rad)

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/14 08:32:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:29:33 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:42:55 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@
 # define TWHITE		0x80FFFFFF
 # define TBLACK		0x80000000
 # define TRANS		0xFF000000
-# define PI			3.14159265359
-# define RAD_90DEG	1.57079632679
 
 /**
  * @brief Double vector struct
