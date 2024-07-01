@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:08:46 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:53:19 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 11:08:23 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	init_mlx(t_gm *gm)
 {
 	gm->mlx = mlx_init();
-	gm->win.ref = mlx_new_window(gm->mlx, WIN_W, WIN_H, "cub3D");
+	gm->win.ref = mlx_new_window(gm->mlx, WIN_W, WIN_H, "raycube");
 	gm->win.frame = 0;
 	gm->win.playing = 0;
 	gm->win.mouse = 1;

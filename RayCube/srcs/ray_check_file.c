@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:03:19 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 09:46:08 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 11:03:14 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	ray_check_element(t_gm *gm, char **av)
 void	ray_check_file(t_gm *gm, int ac, char **av)
 {
 	if (ac < 2)
-		ray_fail_exit("./cub3D [map.cub]", NULL);
+		ray_fail_exit("./raycube [map.cub]", NULL);
 	if (ft_strncmp(&av[1][ft_strlen(av[1]) - 4], ".cub", 4) != 0)
 		ray_fail_exit("Invalid file format", av[1]);
 	ray_check_element(gm, av);
