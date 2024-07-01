@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/07/01 08:33:49 by Tiago                    /   (_____/     */
-/*   Updated: 2024/07/01 08:35:58 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:49:11 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void	ray_door_state(t_gm *gm, int keycode)
 {
 	if (keycode != KEY_E)
 		return ;
-	gm->map.door_state = gm->map.door_state == 0;
 	gm->win.playing = 1;
 }
