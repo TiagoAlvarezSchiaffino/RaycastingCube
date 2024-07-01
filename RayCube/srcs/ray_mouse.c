@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/26 07:22:18 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/26 08:20:15 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:12:02 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	ray_mouse_control(t_gm *gm)
 	double	angle;
 
 	mlx_mouse_get_pos(gm->win.ref, &ms.x, &ms.y);
-	if (ms.x >= WIN_W - 1)
+	if (ms.x >= WIN_W)
 		mlx_mouse_move(gm->win.ref, 0, WIN_H / 2);
 	else if (ms.x <= 0)
 		mlx_mouse_move(gm->win.ref, WIN_W, WIN_H / 2);
-	else
+	else if (ms.y >= WIN_H || ms.y <= 0)
 		mlx_mouse_move(gm->win.ref, ms.x, WIN_H / 2);
 	ratio = ms.x / (double)WIN_W;
 	angle = (PI * ratio * 2) - PI;
-	gm->ply.dir.x = gm->ply.c_dir.x * cos(angle) + gm->ply.c_dir.y * sin(angle);
-	gm->ply.dir.y = gm->ply.c_dir.y * cos(angle) - gm->ply.c_dir.x * sin(angle);
-	gm->ply.plane.x = gm->ply.dir.y;
-	gm->ply.plane.y = -gm->ply.dir.x;
+	gm->ply.dir.y = gm->ply.c_dir.x * cos(angle) + gm->ply.c_dir.y * sin(angle);
+	gm->ply.dir.x = gm->ply.c_dir.y * cos(angle) - gm->ply.c_dir.x * sin(angle);
+	gm->ply.plane.x = -gm->ply.dir.y;
+	gm->ply.plane.y = gm->ply.dir.x;
 }
 
 void	ray_mouse_state(t_gm *gm, int keycode)

@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/23 07:02:22 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 07:31:57 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:10:34 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ void	ray_render(t_gm *gm)
 		else
 		{
 			if (gm->render.step_y == 1)
-				curimg = &gm->map.n_img;
-			else
 				curimg = &gm->map.s_img;
+			else
+				curimg = &gm->map.n_img;
 		}
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit
@@ -141,16 +141,16 @@ void	ray_render(t_gm *gm)
 		if(gm->render.side == 0)
 		{
 			if (gm->render.raydir_x > 0)
-				texX = curimg->size.x - texX - 1;
-			else
 				texX = curimg->size.x - (curimg->size.x - texX - 1);
+			else
+				texX = curimg->size.x - texX - 1;
 		}
 		if(gm->render.side == 1) 
 		{
 			if (gm->render.raydir_y < 0)
-				texX = curimg->size.x - texX - 1;
-			else
 				texX = curimg->size.x - (curimg->size.x - texX - 1);
+			else
+				texX = curimg->size.x - texX - 1;
 		}
 		draw_verline(curimg, x, draw_start, draw_end, texX, gm);
 	}

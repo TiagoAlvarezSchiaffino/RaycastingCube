@@ -8,7 +8,7 @@
 /*                                                            (    @\___      */
 /*                                                             /         O    */
 /*   Created: 2024/06/15 06:49:51 by Tiago                    /   (_____/     */
-/*   Updated: 2024/06/28 07:10:06 by Tiago                  /_____/ U         */
+/*   Updated: 2024/07/01 08:07:13 by Tiago                  /_____/ U         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	set_dir(t_gm *gm, int dir, int x, int y)
 	if (dir == NORTH)
 		gm->ply.plane.x = PLY_PLANE;
 	else if (dir == EAST)
-		gm->ply.plane.y = -PLY_PLANE;
+		gm->ply.plane.y = PLY_PLANE;
 	else if (dir == SOUTH)
 		gm->ply.plane.x = -PLY_PLANE;
 	else if (dir == WEST)
-		gm->ply.plane.y = PLY_PLANE;
+		gm->ply.plane.y = -PLY_PLANE;
 }
 
 static void	get_ply_dir(t_gm *gm, int x, int y)
@@ -49,11 +49,11 @@ static void	get_ply_dir(t_gm *gm, int x, int y)
 		if (gm->ply.e_dir != NOTSET)
 			ray_fail_exit("Duplicated player position in map", NULL);
 		if (gm->map.map[y][x] == 'N')
-			set_dir(gm, NORTH, 0, 1);
+			set_dir(gm, NORTH, 0, -1);
 		else if (gm->map.map[y][x] == 'E')
 			set_dir(gm, EAST, 1, 0);
 		else if (gm->map.map[y][x] == 'S')
-			set_dir(gm, SOUTH, 0, -1);
+			set_dir(gm, SOUTH, 0, 1);
 		else if (gm->map.map[y][x] == 'W')
 			set_dir(gm, WEST, -1, 0);
 		gm->ply.pos.x = (double)x;
